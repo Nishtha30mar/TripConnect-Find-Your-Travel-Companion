@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TripConnect - India Destinations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="destinationcss.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo">TripConnect<span></span></div>
+      <div class="tagline">Trusted India travel planner</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero-wrapper">
+      <!-- Left text -->
+      <section class="hero-text">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>100% India focused</span>
+        </div>
+        <h1>
+          Connect your next <span class="highlight">Indian getaway</span> in just a few clicks.
+        </h1>
+        <p class="subtext">
+          Tell TripConnect where you want to go, when, and your budget. Instantly discover curated India tour packages or build a custom itinerary with your own twist.
+        </p>
+        <div class="hero-meta">
+          <span>✔ Tailor‑made for Indian travellers</span>
+          <span>✔ Verified itineraries and local stays</span>
+        </div>
+      </section>
+
+      <!-- Right card -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">Plan your trip</div>
+          <div class="card-caption">
+            Choose your Indian destination, dates, and budget range.
+          </div>
+        </div>
+
+        <form id="tripForm">
+          <!-- Destination dropdown -->
+          <div class="form-group full-width">
+            <label for="destination">Destination in India</label>
+            <select id="destination">
+              <option value="">Select destination</option>
+              <option value="Goa">Goa</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="Rishikesh">Rishikesh</option>
+              <option value="Manali">Manali</option>
+              <option value="Ayodhya">Ayodhya</option>
+            </select>
+            <div class="help-text">
+              Pick one of our featured Indian destinations.
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="form-group">
+            <label for="startDate">Start date</label>
+            <input type="date" id="startDate" />
+          </div>
+
+          <div class="form-group">
+            <label for="endDate">End date</label>
+            <input type="date" id="endDate" />
+          </div>
+
+          <!-- Budget -->
+          <div class="form-group full-width">
+            <label>Budget range (₹)</label>
+            <div class="budget-row">
+              <input
+                type="number"
+                id="budgetMin"
+                placeholder="Min"
+                min="1"
+              />
+              <input
+                type="number"
+                id="budgetMax"
+                placeholder="Max"
+                min="1"
+              />
+            </div>
+            <div class="help-text">
+              Total budget for the entire trip .
+            </div>
+          </div>
+
+          <!-- Travellers -->
+          <div class="form-group full-width">
+            <label for="travellers">Travellers</label>
+            <input
+              type="number"
+              id="travellers"
+              min="1"
+              max="10"
+              placeholder="Number of people"
+            />
+            <div class="help-text">
+              Maximum 10 travellers per booking for now.
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="actions full-width">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="viewPackagesBtn"
+            >
+              View packages
+            </button>
+            <!-- Changed back to button for validation control -->
+            <button
+              type="button"
+              class="btn btn-outline"
+              id="customTripBtn"
+            >
+              Customize your own trip
+            </button>
+          </div>
+
+          <!-- Results -->
+          <!-- Replace the results div in your HTML with this -->
+<div class="results full-width" id="results">
+  <div class="results-header">
+    <strong>Available Packages</strong>
+    <span id="resultsCount" class="results-count">0 packages found</span>
+  </div>
+  <div id="packagesList" class="packages-list">
+    <!-- Packages will be loaded here -->
+  </div>
+  <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+    <p>Searching packages...</p>
+  </div>
+  <div id="noResults" class="no-results" style="display: none;">
+    <p>No packages found matching your criteria. Try adjusting your filters.</p>
+  </div>
+</div>
+
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 TripConnect India. All rights reserved.
+  </footer>
+
+  <script src="destinationjs.js"></script>
+</body>
+</html>

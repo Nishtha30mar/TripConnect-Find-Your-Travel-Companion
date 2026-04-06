@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personalized Travel Itinerary | Smart Refund Policy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            color: #333;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            transition: background-image 0.5s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h1 i {
+            color: #FFA500;
+        }
+
+        .destination-badge {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interests-bar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .interests-label {
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interest-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trip-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .summary-item i {
+            font-size: 2rem;
+            color: #FFD700;
+        }
+
+        .summary-item div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .summary-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .summary-item .value {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .itinerary-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid #FFA500;
+            padding-bottom: 10px;
+        }
+
+        .section-title i {
+            color: #FFA500;
+        }
+
+        .day-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FFA500;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .day-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .day-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-title i {
+            color: #FFA500;
+        }
+
+        .day-date {
+            background: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .activities-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .activities-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #dee2e6;
+        }
+
+        .activities-list li:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            background: #FFA500;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFA500;
+        }
+
+        .activity-desc {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .activity-interest {
+            background: #e9ecef;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .self-paid-badge {
+            background: #ffc107;
+            color: #856404;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .pickup-location {
+            background: linear-gradient(135deg, #f0f7ff, #e8f0fe);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #FFA500;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pickup-icon {
+            width: 60px;
+            height: 60px;
+            background: #FFA500;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .pickup-info h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .pickup-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .pickup-address {
+            font-weight: 600;
+            color: #FFA500;
+            font-size: 1.1rem;
+        }
+
+        .interest-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: 1px solid #dee2e6;
+        }
+
+        .filter-btn.active {
+            background: #FFA500;
+            color: white;
+            border-color: #FFA500;
+        }
+
+        .payment-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 20px;
+        }
+
+        .cost-breakdown {
+            margin: 25px 0;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .cost-item.total {
+            border-bottom: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            padding-top: 20px;
+            margin-top: 10px;
+            border-top: 2px solid #FFA500;
+        }
+
+        .cost-item.discount {
+            color: #28a745;
+        }
+
+        .refund-policy {
+            background: #fef2e0;
+            border-left: 5px solid #FFA500;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .refund-policy h4 {
+            color: #e67e22;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .refund-policy ul {
+            margin-left: 20px;
+            list-style: none;
+        }
+
+        .refund-policy li {
+            margin: 10px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .refund-policy li i {
+            color: #e67e22;
+            width: 20px;
+            margin-top: 3px;
+        }
+
+        .payment-methods {
+            margin: 25px 0;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: #FFA500;
+            background: #fff3e0;
+        }
+
+        .payment-method.selected {
+            border-color: #FFA500;
+            background: #fff3e0;
+        }
+
+        .payment-method i {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .pay-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .pay-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .homepage-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            margin-top: 12px;
+            text-decoration: none;
+        }
+
+        .homepage-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .booking-code {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .booking-code.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .booking-code .code {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFA500;
+            letter-spacing: 3px;
+            margin: 10px 0;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FFA500;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .duration-badge {
+            background: #ff9800;
+            color: white;
+            border-radius: 30px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>
+                    <i class="fas fa-map-marked-alt"></i>
+                    Your Personalized Itinerary
+                </h1>
+                <span class="destination-badge" id="destinationBadge">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="destinationName">Loading...</span>
+                </span>
+            </div>
+
+            <div class="interests-bar" id="interestsBar">
+                <span class="interests-label">
+                    <i class="fas fa-heart" style="color: #FFA500;"></i>
+                    Based on your interests:
+                </span>
+                <div id="interestsList"></div>
+            </div>
+
+            <div class="trip-summary" id="tripSummary">
+                <div class="summary-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>
+                        <span class="label">Duration</span>
+                        <span class="value" id="tripDuration">Loading...</span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-user-friends"></i>
+                    <div>
+                        <span class="label">Travelers</span>
+                        <span class="value" id="travelerCount">Loading...</span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="label">Start Date</span>
+                        <span class="value" id="startDate">Loading...</span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="label">End Date</span>
+                        <span class="value" id="endDate">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="interest-filter" id="interestFilter">
+            <button class="filter-btn active" onclick="filterByInterest('all')">
+                <i class="fas fa-globe"></i> All Activities
+            </button>
+        </div>
+
+        <div class="main-content">
+            <section class="itinerary-section">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-week"></i>
+                    Day-wise Activities
+                </h2>
+                <div id="itineraryContainer">
+                    <div style="text-align: center; padding: 50px;">
+                        <div class="loading-spinner"></div>
+                        <p style="margin-top: 20px; color: #666;">Creating your personalized itinerary...</p>
+                    </div>
+                </div>
+                
+                <div class="pickup-location" id="pickupLocation">
+                    <div class="pickup-icon">
+                        <i class="fas fa-map-pin"></i>
+                    </div>
+                    <div class="pickup-info">
+                        <h3><i class="fas fa-users"></i> Group Meeting Point</h3>
+                        <p>All group members will gather here before starting the day's activities</p>
+                        <div class="pickup-address" id="pickupAddress">
+                            <i class="fas fa-location-dot"></i> Loading...
+                        </div>
+                        <p style="font-size: 0.85rem; margin-top: 8px;">
+                            <i class="fas fa-clock"></i> Meeting Time: 8:30 AM Daily
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="payment-section">
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    Payment Details
+                </h2>
+
+                <div class="note-box" style="background:#fff3cd; border-left:4px solid #ffc107; padding:12px; border-radius:8px; margin-bottom:15px;">
+                    <i class="fas fa-info-circle" style="color: #ffc107;"></i>
+                    <strong>Note:</strong> Accommodation and meals are not included. You can book them separately.
+                </div>
+
+                <div class="cost-breakdown" id="costBreakdown">
+                    <div class="cost-item">
+                        <span>Activity Package Base Price:</span>
+                        <span id="basePrice">₹0</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Number of Travelers:</span>
+                        <span id="totalTravelers">0</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Activities & Experiences:</span>
+                        <span id="activitiesCost">₹0</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Entry Fees & Permits:</span>
+                        <span id="entryFees">₹0</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Local Transportation:</span>
+                        <span id="transportCost">₹0</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Guide Services:</span>
+                        <span id="guideCost">₹0</span>
+                    </div>
+                    <div class="cost-item discount" id="groupDiscountRow" style="display: none;">
+                        <span>Group Discount (5+ travelers):</span>
+                        <span id="groupDiscount">-₹0</span>
+                    </div>
+                    <div class="cost-item total">
+                        <span>Total Amount:</span>
+                        <span id="totalAmount">₹0</span>
+                    </div>
+                </div>
+
+                <div class="refund-policy">
+                    <h4><i class="fas fa-undo-alt"></i> Cancellation & Refund Policy</h4>
+                    <ul>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation more than 30 days before start:</strong> 90% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 15 - 30 days before start:</strong> 75% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 7 - 14 days before start:</strong> 50% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 3 - 6 days before start:</strong> 25% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation within 48 hours:</strong> No Refund</li>
+                    </ul>
+                    <div style="margin-top: 10px; font-size: 0.8rem; color: #b85c00;">
+                        <i class="fas fa-shield-alt"></i> Refund processed within 7-10 business days.
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <h4 style="margin-bottom: 15px;">Select Payment Method</h4>
+                    <div class="payment-method" onclick="selectPaymentMethod('card')" id="methodCard">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Credit/Debit Card</span>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('upi')" id="methodUpi">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>UPI (Google Pay/PhonePe/Paytm)</span>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('netbanking')" id="methodNetbanking">
+                        <i class="fas fa-university"></i>
+                        <span>Net Banking</span>
+                    </div>
+                </div>
+
+                <button class="pay-btn" id="payBtn" onclick="processPayment()">
+                    <i class="fas fa-lock"></i>
+                    Pay <span id="payAmount">₹0</span>
+                </button>
+
+                <a href="newindex.html" class="homepage-btn">
+                    <i class="fas fa-home"></i>
+                    Back to Homepage
+                </a>
+
+                <div class="booking-code" id="bookingCode">
+                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 3rem;"></i>
+                    <h3>Booking Confirmed!</h3>
+                    <p>Your activity booking code:</p>
+                    <div class="code" id="bookingCodeText">ACT-2024-XXXX</div>
+                    <p style="font-size: 0.9rem; color: #666;">Please save this code for your activities</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p><i class="fas fa-heart" style="color: #ff6b6b;"></i> Have a wonderful trip! <i class="fas fa-heart" style="color: #ff6b6b;"></i></p>
+            <p style="font-size: 0.9rem; opacity: 0.9;">24/7 Support: +91 98765 43210</p>
+        </footer>
+    </div>
+
+    <script>
+        const destinationData = {
+            'goa': { 
+                name: 'Goa', 
+                fullName: 'Goa - Beach Paradise', 
+                image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2', 
+                basePricePerDay: 1200,
+                pickupLocation: 'Calangute Beach Circle, Near Tivai Vaddo, Calangute, Goa - 403516',
+                interests: { 
+                    adventure: [
+                        { name: 'Scuba Diving at Grande Island', cost: 2500, duration: '3 hours', icon: 'fa-water', desc: 'Experience underwater marine life with certified instructors' },
+                        { name: 'Parasailing at Baga Beach', cost: 1800, duration: '30 mins', icon: 'fa-parachute-box', desc: 'Fly high above the Arabian Sea with stunning views' },
+                        { name: 'Jet Ski Ride', cost: 1200, duration: '20 mins', icon: 'fa-water', desc: 'Speed through the waves on a thrilling jet ski' },
+                        { name: 'Banana Boat Ride', cost: 800, duration: '20 mins', icon: 'fa-ship', desc: 'Fun group activity bouncing on the waves' }
+                    ],
+                    nature: [
+                        { name: 'Dudhsagar Falls Trek', cost: 1200, duration: 'Full day', icon: 'fa-waterfall', desc: 'Trek through jungle to Goa\'s tallest waterfall' },
+                        { name: 'Butterfly Beach Visit', cost: 800, duration: '3 hours', icon: 'fa-dove', desc: 'Secluded beach known for butterflies and dolphins' },
+                        { name: 'Spice Plantation Tour', cost: 600, duration: '2 hours', icon: 'fa-leaf', desc: 'Explore aromatic spice gardens and learn about cultivation' }
+                    ],
+                    cultural: [
+                        { name: 'Old Goa Churches Tour', cost: 400, duration: '4 hours', icon: 'fa-church', desc: 'Visit Basilica of Bom Jesus, Se Cathedral' },
+                        { name: 'Portuguese Heritage Walk', cost: 500, duration: '3 hours', icon: 'fa-landmark', desc: 'Walk through Fontainhas Latin Quarter' },
+                        { name: 'Goan Cooking Class', cost: 1200, duration: '3 hours', icon: 'fa-utensils', desc: 'Learn traditional Goan recipes' }
+                    ],
+                    relaxation: [
+                        { name: 'Ayurvedic Massage', cost: 1200, duration: '1 hour', icon: 'fa-spa', desc: 'Traditional Kerala massage therapy' },
+                        { name: 'Sunset Cruise with Dinner', cost: 1800, duration: '2 hours', icon: 'fa-ship', desc: 'Romantic sunset views with live music' }
+                    ],
+                    photography: [
+                        { name: 'Sunset Photography Tour', cost: 800, duration: '3 hours', icon: 'fa-camera', desc: 'Capture Goa\'s best sunset spots' },
+                        { name: 'Street Photography Walk', cost: 500, duration: '2 hours', icon: 'fa-camera-retro', desc: 'Document Goan culture and architecture' }
+                    ] 
+                } 
+            },
+            'jaipur': { 
+                name: 'Jaipur', 
+                fullName: 'Jaipur - Pink City', 
+                image: 'https://images.unsplash.com/photo-1585506936724-fa0c19c7b3c9', 
+                basePricePerDay: 1000,
+                pickupLocation: 'Hawa Mahal Entrance Gate, Badi Choupad, Jaipur, Rajasthan - 302002',
+                interests: { 
+                    adventure: [
+                        { name: 'Hot Air Balloon Ride', cost: 3500, duration: '1 hour', icon: 'fa-balloon', desc: 'Aerial view of Amer Fort and Jaipur city' },
+                        { name: 'Elephant Ride at Amer Fort', cost: 1500, duration: '30 mins', icon: 'fa-elephant', desc: 'Royal ride up to the fort entrance' }
+                    ],
+                    cultural: [
+                        { name: 'Amber Fort Guided Tour', cost: 500, duration: '3 hours', icon: 'fa-fort-awesome', desc: 'Explore the magnificent hill fort' },
+                        { name: 'Block Printing Workshop', cost: 800, duration: '2 hours', icon: 'fa-palette', desc: 'Learn traditional Sanganeri printing' },
+                        { name: 'City Palace & Jantar Mantar', cost: 600, duration: '3 hours', icon: 'fa-palace', desc: 'Royal residence and astronomical observatory' }
+                    ],
+                    nature: [
+                        { name: 'Sisodia Rani Garden', cost: 200, duration: '1 hour', icon: 'fa-tree', desc: 'Beautiful tiered garden with fountains' },
+                        { name: 'Jal Mahal Viewpoint', cost: 100, duration: '1 hour', icon: 'fa-water', desc: 'Sunset views of the lake palace' }
+                    ],
+                    shopping: [
+                        { name: 'Johari Bazaar Tour', cost: 200, duration: '3 hours', icon: 'fa-gem', desc: 'Famous for jewelry and traditional wear' },
+                        { name: 'Bapu Bazaar Shopping', cost: 100, duration: '2 hours', icon: 'fa-shopping-bag', desc: 'Handicrafts, textiles, and souvenirs' }
+                    ] 
+                } 
+            },
+            'rishikesh': { 
+                name: 'Rishikesh', 
+                fullName: 'Rishikesh - Yoga Capital', 
+                image: 'https://images.unsplash.com/photo-1597074861081-8b3e5e7b3b1e', 
+                basePricePerDay: 900,
+                pickupLocation: 'Ram Jhula Bridge, Swarg Ashram, Rishikesh, Uttarakhand - 249304',
+                interests: { 
+                    adventure: [
+                        { name: 'River Rafting (16 km stretch)', cost: 800, duration: '3 hours', icon: 'fa-water', desc: 'Raft through rapids like Roller Coaster, Golf Course' },
+                        { name: 'Bungee Jumping', cost: 2500, duration: '30 mins', icon: 'fa-parachute-box', desc: 'Jump from 83 meters - India\'s highest' },
+                        { name: 'Flying Fox', cost: 1500, duration: '1 hour', icon: 'fa-dove', desc: 'Zipline across the Ganges' },
+                        { name: 'Cliff Jumping', cost: 500, duration: '30 mins', icon: 'fa-mountain', desc: 'Adrenaline rush from natural cliffs' }
+                    ],
+                    spiritual: [
+                        { name: 'Ganga Aarti at Parmarth Niketan', cost: 0, duration: '1 hour', icon: 'fa-fire', desc: 'Mesmerizing evening ceremony' },
+                        { name: 'Yoga Session with Guru', cost: 300, duration: '1 hour', icon: 'fa-pray', desc: 'Traditional Hatha Yoga class' },
+                        { name: 'Meditation Workshop', cost: 400, duration: '2 hours', icon: 'fa-om', desc: 'Learn Vipassana meditation techniques' },
+                        { name: 'Temple Hopping', cost: 100, duration: '3 hours', icon: 'fa-temple', desc: 'Visit Neelkanth, Kunjapuri temples' }
+                    ],
+                    nature: [
+                        { name: 'Neer Garh Waterfall', cost: 500, duration: '3 hours', icon: 'fa-waterfall', desc: 'Trek to scenic waterfalls' },
+                        { name: 'Sunrise at Kunjapuri Temple', cost: 1200, duration: '4 hours', icon: 'fa-mountain-sun', desc: 'Early morning Himalayan views' }
+                    ],
+                    wellness: [
+                        { name: 'Ayurvedic Massage', cost: 800, duration: '1 hour', icon: 'fa-spa', desc: 'Panchakarma therapy' },
+                        { name: 'Sound Healing Session', cost: 600, duration: '1 hour', icon: 'fa-music', desc: 'Tibetan singing bowls meditation' }
+                    ] 
+                } 
+            },
+            'manali': { 
+                name: 'Manali', 
+                fullName: 'Manali - Himalayan Paradise', 
+                image: 'https://images.unsplash.com/photo-1593693399744-b3d7a2c84c0c', 
+                basePricePerDay: 1100,
+                pickupLocation: 'Mall Road Main Gate, Near Tibetan Market, Manali, Himachal Pradesh - 175131',
+                interests: { 
+                    adventure: [
+                        { name: 'Paragliding at Solang Valley', cost: 1800, duration: '30 mins', icon: 'fa-parachute-box', desc: 'Soar above snow-capped peaks' },
+                        { name: 'Snow Scooter Ride', cost: 1200, duration: '20 mins', icon: 'fa-motorcycle', desc: 'Fun ride on snowy slopes' },
+                        { name: 'Skiing Lessons', cost: 1500, duration: '2 hours', icon: 'fa-skiing', desc: 'Basic ski training for beginners' }
+                    ],
+                    nature: [
+                        { name: 'Rohtang Pass Trip', cost: 2000, duration: 'Full day', icon: 'fa-mountain', desc: 'Snow activities at 13,050 ft' },
+                        { name: 'Jogini Falls Trek', cost: 300, duration: '2 hours', icon: 'fa-waterfall', desc: 'Beautiful waterfall trek' },
+                        { name: 'Solang Valley Visit', cost: 500, duration: '3 hours', icon: 'fa-mountain', desc: 'Adventure sports hub' }
+                    ],
+                    cultural: [
+                        { name: 'Hadimba Temple', cost: 100, duration: '1 hour', icon: 'fa-temple', desc: 'Ancient wooden temple' },
+                        { name: 'Manu Temple & Old Manali', cost: 200, duration: '2 hours', icon: 'fa-landmark', desc: 'Historic temples and cafes' }
+                    ],
+                    relaxation: [
+                        { name: 'Hot Springs Bath', cost: 200, duration: '1 hour', icon: 'fa-hot-tub', desc: 'Natural sulfur hot springs' },
+                        { name: 'River Side Camping', cost: 1000, duration: 'Overnight', icon: 'fa-campground', desc: 'Bonfire and stargazing' }
+                    ] 
+                } 
+            },
+            'ayodhya': { 
+                name: 'Ayodhya', 
+                fullName: 'Ayodhya - Spiritual Capital', 
+                image: 'https://images.unsplash.com/photo-1585506936724-fa0c19c7b3c9', 
+                basePricePerDay: 700,
+                pickupLocation: 'Ram Janmabhoomi Complex, Near Saryu River, Ayodhya, Uttar Pradesh - 224123',
+                interests: { 
+                    spiritual: [
+                        { name: 'Ram Janmabhoomi Darshan', cost: 0, duration: '2 hours', icon: 'fa-temple', desc: 'Visit the sacred birthplace of Lord Ram' },
+                        { name: 'Saryu Aarti Ceremony', cost: 0, duration: '1 hour', icon: 'fa-fire', desc: 'Evening aarti at the ghats' },
+                        { name: 'Hanuman Garhi Temple', cost: 0, duration: '1 hour', icon: 'fa-temple', desc: 'Ancient temple dedicated to Lord Hanuman' }
+                    ],
+                    cultural: [
+                        { name: 'Ram Katha Session', cost: 100, duration: '2 hours', icon: 'fa-book', desc: 'Recitation of Ramayana stories' },
+                        { name: 'Ayodhya Heritage Walk', cost: 300, duration: '3 hours', icon: 'fa-landmark', desc: 'Explore historical sites and temples' }
+                    ],
+                    nature: [
+                        { name: 'Saryu River Boat Ride', cost: 100, duration: '30 mins', icon: 'fa-ship', desc: 'Peaceful boat ride on holy river' },
+                        { name: 'Guptar Ghat Visit', cost: 0, duration: '1 hour', icon: 'fa-water', desc: 'Scenic ghat for sunset views' }
+                    ],
+                    heritage: [
+                        { name: 'Kanak Bhawan', cost: 50, duration: '1 hour', icon: 'fa-palace', desc: 'Palace of Lord Ram and Sita' },
+                        { name: 'Treta Ke Thakur', cost: 50, duration: '30 mins', icon: 'fa-church', desc: 'Site where Ram performed Ashwamedha Yagna' }
+                    ] 
+                } 
+            }
+        };
+
+        let currentDestination = null, tripData = null, userInterests = [], selectedPaymentMethod = 'card', totalAmount = 0;
+        let allMasterActivities = [];
+
+        document.addEventListener('DOMContentLoaded', () => { loadTripData(); });
+
+        function loadTripData() {
+            try {
+                const savedParams = sessionStorage.getItem('lastSearchParams');
+                const storedInterests = sessionStorage.getItem('selectedInterests');
+                if (!savedParams) throw new Error('No trip data found.');
+                tripData = JSON.parse(savedParams);
+                userInterests = storedInterests ? JSON.parse(storedInterests) : ['adventure', 'nature', 'cultural'];
+                const destKey = tripData.destination?.toLowerCase() || 'rishikesh';
+                currentDestination = destinationData[destKey] || destinationData['rishikesh'];
+                updatePageWithData();
+                buildMasterActivitiesList();
+                generateInterestFilters();
+                generateFullItinerary();
+                calculateCosts();
+                updatePickupLocation();
+                if (currentDestination.image) document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${currentDestination.image}')`;
+            } catch (error) { console.error(error); showError('Failed to load itinerary. Please plan your trip first.'); }
+        }
+
+        function updatePickupLocation() {
+            const pickupElement = document.getElementById('pickupAddress');
+            if (pickupElement && currentDestination.pickupLocation) {
+                pickupElement.innerHTML = `<i class="fas fa-location-dot"></i> ${currentDestination.pickupLocation}`;
+            }
+        }
+
+        function buildMasterActivitiesList() {
+            allMasterActivities = [];
+            for (let interest of userInterests) {
+                if (currentDestination.interests[interest]) {
+                    currentDestination.interests[interest].forEach(act => {
+                        allMasterActivities.push({ ...act, interest: interest });
+                    });
+                }
+            }
+            if (allMasterActivities.length === 0) {
+                for (let key in currentDestination.interests) {
+                    currentDestination.interests[key].forEach(act => allMasterActivities.push({ ...act, interest: key }));
+                }
+            }
+        }
+
+        function updatePageWithData() {
+            document.getElementById('destinationName').textContent = currentDestination.fullName;
+            updateInterestsDisplay();
+            document.getElementById('startDate').textContent = formatDate(tripData.startDate);
+            document.getElementById('endDate').textContent = formatDate(tripData.endDate);
+            const startDate = new Date(tripData.startDate), endDate = new Date(tripData.endDate);
+            const duration = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
+            document.getElementById('tripDuration').textContent = `${duration} Days`;
+            document.getElementById('travelerCount').textContent = tripData.travellers + ' Travelers';
+        }
+
+        function formatDate(dateStr) { if(!dateStr) return 'Not set'; return new Date(dateStr).toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' }); }
+
+        function updateInterestsDisplay() {
+            const interestsList = document.getElementById('interestsList');
+            interestsList.innerHTML = '';
+            userInterests.forEach(interest => {
+                let icon = { adventure:'fa-mountain', nature:'fa-tree', cultural:'fa-landmark', spiritual:'fa-om', relaxation:'fa-spa', photography:'fa-camera', shopping:'fa-shopping-bag', wellness:'fa-heartbeat', heritage:'fa-archaeology' }[interest] || 'fa-heart';
+                const tag = document.createElement('span');
+                tag.className = 'interest-tag';
+                tag.innerHTML = `<i class="fas ${icon}"></i> ${interest.charAt(0).toUpperCase() + interest.slice(1)}`;
+                interestsList.appendChild(tag);
+            });
+        }
+
+        function generateInterestFilters() {
+            const container = document.getElementById('interestFilter');
+            container.innerHTML = `<button class="filter-btn active" onclick="filterByInterest('all')"><i class="fas fa-globe"></i> All Activities</button>`;
+            userInterests.forEach(interest => {
+                let iconMap = { adventure:'fa-mountain', nature:'fa-tree', cultural:'fa-landmark', spiritual:'fa-om', relaxation:'fa-spa', photography:'fa-camera', shopping:'fa-shopping-bag', wellness:'fa-heartbeat', heritage:'fa-archaeology' };
+                let icon = iconMap[interest] || 'fa-heart';
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.setAttribute('onclick', `filterByInterest('${interest}')`);
+                btn.innerHTML = `<i class="fas ${icon}"></i> ${interest.charAt(0).toUpperCase() + interest.slice(1)}`;
+                container.appendChild(btn);
+            });
+        }
+
+        function filterByInterest(interest) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            generateFullItinerary(interest === 'all' ? null : interest);
+        }
+
+        function generateFullItinerary(onlyInterest = null) {
+            const container = document.getElementById('itineraryContainer');
+            container.innerHTML = '';
+            const start = new Date(tripData.startDate);
+            const end = new Date(tripData.endDate);
+            const totalDays = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)));
+            
+            let activitiesPool = onlyInterest ? allMasterActivities.filter(a => a.interest === onlyInterest) : [...allMasterActivities];
+            if (activitiesPool.length === 0 && onlyInterest) activitiesPool = [...allMasterActivities];
+            if (activitiesPool.length === 0) {
+                container.innerHTML = '<div class="error-message">No activities available for selected interests. Try different filter.</div>';
+                return;
+            }
+            
+            const maxPerDay = 4;
+            const totalActivitiesNeeded = Math.min(activitiesPool.length, totalDays * maxPerDay);
+            let shuffledPool = shuffleArray([...activitiesPool]);
+            let usedActivities = shuffledPool.slice(0, totalActivitiesNeeded);
+            
+            const daysDistribution = [];
+            for (let i = 0; i < totalDays; i++) daysDistribution.push([]);
+            let actIndex = 0;
+            for (let day = 0; day < totalDays && actIndex < usedActivities.length; day++) {
+                let activitiesForDay = [];
+                let remainingPerDay = Math.min(maxPerDay, Math.ceil((usedActivities.length - actIndex) / (totalDays - day)));
+                for (let j = 0; j < remainingPerDay && actIndex < usedActivities.length; j++) {
+                    activitiesForDay.push(usedActivities[actIndex++]);
+                }
+                daysDistribution[day] = activitiesForDay;
+            }
+            
+            const timeSlots = ['09:00 AM', '11:30 AM', '02:00 PM', '04:30 PM'];
+            for (let day = 1; day <= totalDays; day++) {
+                const currentDate = new Date(start);
+                currentDate.setDate(start.getDate() + (day - 1));
+                const dateStr = currentDate.toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'short' });
+                let dayActivities = daysDistribution[day-1] || [];
+                
+                if (dayActivities.length === 0) {
+                    const fallbackActivity = {
+                        name: 'Local Exploration & Cultural Immersion',
+                        cost: 500,
+                        duration: 'Full day',
+                        icon: 'fa-umbrella-beach',
+                        desc: 'Explore local markets, cafes, and hidden gems',
+                        interest: 'relaxation'
+                    };
+                    dayActivities.push(fallbackActivity);
+                }
+                
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                let activitiesHtml = '';
+                
+                dayActivities.forEach((act, idx) => {
+                    activitiesHtml += `<li>
+                        <span class="activity-time">${timeSlots[idx % timeSlots.length]}</span>
+                        <div class="activity-icon"><i class="fas ${act.icon || 'fa-heart'}"></i></div>
+                        <div class="activity-desc">
+                            <strong>${act.name}</strong>
+                            <small style="display:block; color:#666;">${act.desc || act.duration}</small>
+                        </div>
+                        <span class="activity-interest"><i class="fas fa-tag"></i> ${act.interest}</span>
+                    </li>`;
+                });
+                
+                // Lunch break with "Self Paid" label
+                activitiesHtml += `<li>
+                    <span class="activity-time">01:00 PM</span>
+                    <div class="activity-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="activity-desc">
+                        <strong>Lunch Break</strong>
+                        <small>Recommended local restaurant</small>
+                        <span class="self-paid-badge"><i class="fas fa-rupee-sign"></i> Self Paid</span>
+                    </div>
+                    <span class="activity-interest"><i class="fas fa-tag"></i> Food</span>
+                </li>`;
+                
+                const eveningActivity = {
+                    name: 'Cultural Evening & Local Experience',
+                    desc: 'Explore nightlife or attend cultural performance',
+                    cost: 400,
+                    icon: 'fa-moon'
+                };
+                activitiesHtml += `<li>
+                    <span class="activity-time">07:00 PM</span>
+                    <div class="activity-icon"><i class="fas ${eveningActivity.icon}"></i></div>
+                    <div class="activity-desc">
+                        <strong>${eveningActivity.name}</strong>
+                        <small style="display:block; color:#666;">${eveningActivity.desc}</small>
+                    </div>
+                    <span class="activity-interest"><i class="fas fa-tag"></i> Culture</span>
+                </li>`;
+                
+                const theme = dayActivities[0].interest.charAt(0).toUpperCase() + dayActivities[0].interest.slice(1);
+                dayCard.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-title"><i class="fas fa-calendar-day"></i> Day ${day}: ${theme} Adventure</div>
+                        <div class="day-date"><i class="fas fa-calendar-alt"></i> ${dateStr}</div>
+                    </div>
+                    <ul class="activities-list">${activitiesHtml}</ul>
+                `;
+                container.appendChild(dayCard);
+            }
+            calculateCosts();
+        }
+
+        function shuffleArray(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+        function calculateCosts() {
+            const travelerCount = parseInt(tripData.travellers) || 1;
+            const start = new Date(tripData.startDate), end = new Date(tripData.endDate);
+            const duration = Math.max(1, Math.ceil((end - start) / (1000*60*60*24)));
+            const activitiesTotal = allMasterActivities.reduce((sum, a) => sum + a.cost, 0);
+            const entryFees = Math.round(activitiesTotal * 0.1);
+            const transportCost = 500 * duration * travelerCount;
+            const guideCost = 800 * duration;
+            let subtotal = activitiesTotal + entryFees + transportCost + guideCost;
+            let groupDiscount = 0;
+            if (travelerCount >= 5) { groupDiscount = subtotal * 0.1; document.getElementById('groupDiscountRow').style.display = 'flex'; document.getElementById('groupDiscount').textContent = `-₹${Math.round(groupDiscount).toLocaleString()}`; }
+            else { document.getElementById('groupDiscountRow').style.display = 'none'; }
+            totalAmount = subtotal - groupDiscount;
+            document.getElementById('basePrice').textContent = `₹${Math.round(currentDestination.basePricePerDay * duration).toLocaleString()}`;
+            document.getElementById('totalTravelers').textContent = travelerCount;
+            document.getElementById('activitiesCost').textContent = `₹${activitiesTotal.toLocaleString()}`;
+            document.getElementById('entryFees').textContent = `₹${entryFees.toLocaleString()}`;
+            document.getElementById('transportCost').textContent = `₹${transportCost.toLocaleString()}`;
+            document.getElementById('guideCost').textContent = `₹${guideCost.toLocaleString()}`;
+            document.getElementById('totalAmount').textContent = `₹${Math.round(totalAmount).toLocaleString()}`;
+            document.getElementById('payAmount').textContent = `₹${Math.round(totalAmount).toLocaleString()}`;
+        }
+
+        function selectPaymentMethod(method) { selectedPaymentMethod = method; document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected')); document.getElementById(`method${method.charAt(0).toUpperCase() + method.slice(1)}`).classList.add('selected'); }
+
+        async function processPayment() {
+            const payBtn = document.getElementById('payBtn');
+            const original = payBtn.innerHTML;
+            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            payBtn.disabled = true;
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1800));
+                const bookingCode = `ACT-${currentDestination.name.substring(0,2).toUpperCase()}-${new Date().getFullYear()}${(new Date().getMonth()+1).toString().padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
+                document.getElementById('bookingCodeText').textContent = bookingCode;
+                document.getElementById('bookingCode').classList.add('show');
+                payBtn.innerHTML = '<i class="fas fa-check-circle"></i> Payment Successful!';
+                storeBooking(bookingCode);
+                showSuccess('Payment successful! Your activities are booked. Meeting point details sent to email.');
+            } catch(e) { payBtn.innerHTML = original; payBtn.disabled = false; showError('Payment failed. Please try again.'); }
+        }
+
+        function storeBooking(code) { let bookings = JSON.parse(localStorage.getItem('activityBookings') || '[]'); bookings.push({ code, destination: currentDestination.name, date: new Date().toISOString(), travelers: tripData.travellers, interests: userInterests, totalAmount, pickupLocation: currentDestination.pickupLocation, tripData }); localStorage.setItem('activityBookings', JSON.stringify(bookings)); sessionStorage.setItem('currentActivityBooking', JSON.stringify({ code })); }
+
+        function showError(msg) { const div = document.createElement('div'); div.className = 'error-message'; div.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${msg}`; document.querySelector('.main-content').insertBefore(div, document.querySelector('.main-content').firstChild); setTimeout(()=>div.remove(),4500); }
+        function showSuccess(msg) { const div = document.createElement('div'); div.className = 'success-message'; div.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; document.querySelector('.main-content').insertBefore(div, document.querySelector('.main-content').firstChild); setTimeout(()=>div.remove(),4500); }
+
+        window.filterByInterest = filterByInterest; window.selectPaymentMethod = selectPaymentMethod; window.processPayment = processPayment;
+    </script>
+</body>
+</html>

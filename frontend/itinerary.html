@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Customized Itinerary - TripConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .back-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        /* Trip Summary Card */
+        .trip-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .trip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .destination-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .destination-title i {
+            color: #667eea;
+        }
+
+        .trip-dates {
+            background: #f8fafc;
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            border: 2px solid #e8f0fe;
+        }
+
+        .trip-dates i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        /* Group Members Section */
+        .group-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .members-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #d5e0f0;
+        }
+
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .member-info h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .member-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .member-info p i {
+            color: #667eea;
+            margin-right: 5px;
+        }
+
+        /* Interests Tags */
+        .interests-section {
+            margin: 25px 0;
+        }
+
+        .interests-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .interest-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Itinerary Timeline */
+        .itinerary-timeline {
+            margin-top: 30px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8f0fe;
+        }
+
+        .day-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-title i {
+            color: #667eea;
+        }
+
+        .day-date {
+            color: #7f8c8d;
+            font-size: 1rem;
+            background: #f8fafc;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .activities-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e8f0fe;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            min-width: 80px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .activity-desc {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .activity-icon {
+            width: 35px;
+            height: 35px;
+            background: #f0f4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        /* Pickup Location Section */
+        .pickup-location {
+            background: linear-gradient(135deg, #fff5e6, #ffe8d6);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #FFA500;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pickup-icon {
+            width: 60px;
+            height: 60px;
+            background: #FFA500;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .pickup-info {
+            flex: 1;
+        }
+
+        .pickup-info h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .pickup-address {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .pickup-time {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Payment Bill Section */
+        .payment-bill {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .bill-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8f0fe;
+        }
+
+        .bill-header i {
+            font-size: 1.8rem;
+            color: #2ecc71;
+        }
+
+        .bill-header h2 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+
+        .bill-items {
+            margin-bottom: 20px;
+        }
+
+        .bill-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e8f0fe;
+        }
+
+        .bill-item:last-child {
+            border-bottom: none;
+        }
+
+        .bill-item .label {
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bill-item .label i {
+            width: 20px;
+            color: #667eea;
+        }
+
+        .bill-item .value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .bill-total {
+            background: linear-gradient(135deg, #f8fafc, #e8f0fe);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bill-total .label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .bill-total .amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2ecc71;
+        }
+
+        .per-person {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .payment-status {
+            background: #f1f9f1;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #27ae60;
+        }
+
+        .payment-status i {
+            font-size: 1.2rem;
+        }
+
+        .pay-now-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 12px;
+        }
+
+        .pay-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        /* Homepage Button - New Style */
+        .homepage-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+
+        .homepage-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            color: #95a5a6;
+            font-size: 0.85rem;
+        }
+
+        .secure-badge i {
+            color: #3498db;
+        }
+
+        /* Refund Policy Section */
+        .refund-policy {
+            background: #fef2e0;
+            border-left: 5px solid #FFA500;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .refund-policy h4 {
+            color: #e67e22;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refund-policy ul {
+            margin-left: 20px;
+            list-style: none;
+        }
+
+        .refund-policy li {
+            margin: 10px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .refund-policy li i {
+            color: #e67e22;
+            width: 20px;
+            margin-top: 3px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: white;
+            padding: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-bill {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .trip-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fas fa-map-marked-alt logo-icon"></i>
+                <h1>Your Customized Itinerary</h1>
+            </div>
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Groups
+            </a>
+        </header>
+
+        <div class="main-layout">
+            <div id="itineraryContent">
+                <!-- Content will be populated by JavaScript -->
+                <div style="text-align: center; padding: 50px; background: white; border-radius: 20px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #667eea;"></i>
+                    <h3 style="margin-top: 20px; color: #2c3e50;">Loading your personalized itinerary...</h3>
+                </div>
+            </div>
+
+            <!-- Payment Bill Section -->
+            <div class="payment-bill" id="paymentBill">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <footer>
+            <p>TripConnect &copy; 2026 | Your Perfect Travel Companion</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Safety Tips</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> 24/7 Support</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Destination pickup locations
+        const pickupLocations = {
+            'Jaipur': {
+                address: 'Hawa Mahal Main Gate, Badi Choupad, Jaipur, Rajasthan - 302002',
+                time: '8:30 AM',
+                instructions: 'Look for TripConnect banner near the main entrance'
+            },
+            'Rishikesh': {
+                address: 'Ram Jhula Bridge, Swarg Ashram, Rishikesh, Uttarakhand - 249304',
+                time: '8:00 AM',
+                instructions: 'Meeting point near the Ram Jhula entrance gate'
+            },
+            'Goa': {
+                address: 'Calangute Beach Circle, Near Tivai Vaddo, Calangute, Goa - 403516',
+                time: '9:00 AM',
+                instructions: 'Look for the TripConnect representative with a blue flag'
+            },
+            'Manali': {
+                address: 'Mall Road Main Gate, Near Tibetan Market, Manali, Himachal Pradesh - 175131',
+                time: '8:30 AM',
+                instructions: 'Meet near the Mall Road entrance arch'
+            },
+            'Ayodhya': {
+                address: 'Ram Janmabhoomi Complex, Near Saryu River, Ayodhya, Uttar Pradesh - 224123',
+                time: '7:30 AM',
+                instructions: 'Meeting point at the main entrance of the complex'
+            }
+        };
+
+        // Complete Itinerary JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get itinerary data from sessionStorage
+            const itineraryData = JSON.parse(sessionStorage.getItem('itineraryData'));
+            const itineraryContent = document.getElementById('itineraryContent');
+            const paymentBill = document.getElementById('paymentBill');
+            
+            if (!itineraryData) {
+                itineraryContent.innerHTML = `
+                    <div style="text-align: center; padding: 60px; background: white; border-radius: 20px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 4rem; color: #e74c3c; margin-bottom: 20px;"></i>
+                        <h2 style="color: #2c3e50; margin-bottom: 15px;">No Itinerary Data Found</h2>
+                        <p style="color: #7f8c8d; margin-bottom: 30px;">Please form a group first to get your customized itinerary.</p>
+                        <a href="travelbuddy.html" class="btn btn-primary" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #3498db, #2ecc71); color: white; text-decoration: none; border-radius: 10px;">
+                            <i class="fas fa-search"></i> Find a Group
+                        </a>
+                    </div>
+                `;
+                paymentBill.style.display = 'none';
+                return;
+            }
+
+            // Destructure data
+            const { 
+                destination, 
+                startDate, 
+                endDate, 
+                duration, 
+                interests, 
+                groupMembers, 
+                matchScore, 
+                groupSize 
+            } = itineraryData;
+
+            // Get pickup location for destination
+            const pickupInfo = pickupLocations[destination] || {
+                address: 'Main City Center, Near Tourist Information Center',
+                time: '9:00 AM',
+                instructions: 'Look for TripConnect representative'
+            };
+
+            // Calculate payment amounts
+            const basePricePerDay = 2000;
+            const activityCostPerDay = 1500;
+            const transportCost = 3000;
+            const guideFees = 2000;
+            
+            const totalDays = duration || 7;
+            const subtotal = (basePricePerDay * totalDays) + (activityCostPerDay * totalDays) + transportCost + guideFees;
+            const gst = Math.round(subtotal * 0.18);
+            const totalAmount = subtotal + gst;
+            const perPersonAmount = Math.round(totalAmount / (groupSize || 1));
+            const advanceAmount = Math.round(perPersonAmount / 2);
+
+            // Format dates for display
+            const formatDate = (dateString) => {
+                if (!dateString) return 'TBD';
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('en-US', options);
+            };
+
+            // Generate itinerary based on destination and interests
+            const generateItinerary = (dest, interestsList, days) => {
+                const itinerary = [];
+                
+                const destinationActivities = {
+                    'Jaipur': {
+                        morning: ['Amber Fort', 'City Palace', 'Hawa Mahal', 'Jantar Mantar', 'Nahargarh Fort'],
+                        afternoon: ['Local Bazaar Shopping', 'Elephant Village', 'Textile Tour', 'Art Gallery Visit'],
+                        evening: ['Chokhi Dhani Cultural Show', 'Light & Sound Show at Amber Fort', 'Sunset at Nahargarh', 'Folk Dance Performance'],
+                        adventure: ['Hot Air Balloon Ride', 'Trekking at Nahargarh', 'Jeep Safari', 'Elephant Ride'],
+                        shopping: ['Johari Bazaar', 'Bapu Bazaar', 'Tripolia Bazaar', 'Rajasthali Handicrafts'],
+                        spiritual: ['Galta Ji Temple', 'Moti Dungri Temple', 'Govind Dev Ji Temple', 'Birla Mandir'],
+                        wellness: ['Ayurvedic Spa', 'Yoga at Heritage Palace', 'Meditation Retreat', 'Heritage Walk'],
+                        wildlife: ['Elephant Safari', 'Bird Watching at Amer', 'Leopard Safari', 'Wildlife Photography']
+                    },
+                    'Rishikesh': {
+                        morning: ['Ganga Aarti at Triveni Ghat', 'Yoga by the Ganges', 'Laxman Jhula Walk', 'Ram Jhula Exploration', 'Sunrise Meditation'],
+                        afternoon: ['River Rafting in Ganges', 'Cafe Exploration', 'Ashram Visit', 'Beatles Ashram Tour', 'Local Market Visit'],
+                        evening: ['Evening Ganga Aarti', 'Riverside Walk', 'Live Music Cafe', 'Sunset at Ganga Ghats', 'Bonfire by Riverside'],
+                        adventure: ['White Water Rafting', 'Bungee Jumping', 'Cliff Jumping', 'Zip Lining', 'Camping by Ganga'],
+                        shopping: ['Rishikesh Market', 'Spiritual Shops', 'Handicraft Stores', 'Souvenir Shopping', 'Local Street Shopping'],
+                        spiritual: ['Parmarth Niketan Ashram', 'Neelkanth Mahadev Temple', 'Meditation at Ashram', 'Yoga Retreat', 'Temple Visits'],
+                        wellness: ['Ayurvedic Massage', 'Yoga Retreat', 'Meditation Camp', 'Spa Therapy', 'Detox Programs'],
+                        wildlife: ['Rajaji National Park Safari', 'Bird Watching', 'Nature Walk', 'Forest Exploration', 'Wildlife Photography']
+                    },
+                    'Goa': {
+                        morning: ['Beach Yoga', 'Portuguese Heritage Walk', 'Spice Plantation Tour', 'Old Goa Churches'],
+                        afternoon: ['Water Sports', 'Beach Hopping', 'Casino Visit', 'Art & Craft Workshops'],
+                        evening: ['Sunset Cruise', 'Flea Markets', 'Live Music', 'Cultural Shows'],
+                        adventure: ['Scuba Diving', 'Parasailing', 'Jet Skiing', 'Banana Boat Ride'],
+                        shopping: ['Anjuna Flea Market', 'Mapusa Market', 'Saturday Night Market', 'Casino'],
+                        spiritual: ['Basilica of Bom Jesus', 'Se Cathedral', 'Shanta Durga Temple', 'Mangeshi Temple'],
+                        wellness: ['Ayurvedic Massage', 'Befront Yoga', 'Meditation Center', 'Spa Retreat'],
+                        wildlife: ['Dolphin Watching', 'Bird Sanctuary', 'Butterfly Beach', 'Crocodile Spotting']
+                    },
+                    'Manali': {
+                        morning: ['Yoga at Sunrise', 'Himalayan Views', 'Temple Visits', 'Nature Walk'],
+                        afternoon: ['River Rafting', 'Local Sightseeing', 'Cafe Hopping', 'Photography Tour'],
+                        evening: ['Bonfire Night', 'Local Music', 'Stargazing', 'Cultural Performance'],
+                        adventure: ['Paragliding', 'Skiing', 'Trekking', 'Mountain Biking'],
+                        shopping: ['Mall Road', 'Tibetan Markets', 'Local Handicrafts', 'Woolen Clothes'],
+                        spiritual: ['Hidimba Temple', 'Manu Temple', 'Buddhist Monasteries', 'Gadhan Thekchhokling'],
+                        wellness: ['Hot Springs', 'Spa Retreat', 'Meditation Center', 'Yoga Retreat'],
+                        wildlife: ['Wildlife Sanctuary', 'Bird Watching', 'Nature Walk', 'Butterfly Park']
+                    },
+                    'Ayodhya': {
+                        morning: ['Ram Janmabhoomi Temple', 'Morning Aarti', 'Sarayu River Bath', 'Temple Tour'],
+                        afternoon: ['Temple Hopping', 'Heritage Walk', 'Museum Visit', 'Cultural Center'],
+                        evening: ['Evening Aarti', 'Cultural Show', 'Riverfront Walk', 'Light Ceremony'],
+                        adventure: ['River Boating', 'Cycling Tour', 'Nature Walk', 'Heritage Trail'],
+                        shopping: ['Local Markets', 'Handicrafts', 'Religious Items', 'Ayodhya Souvenirs'],
+                        spiritual: ['Hanuman Garhi', 'Kanak Bhawan', 'Nageshwarnath Temple', 'Treta Ke Thakur'],
+                        wellness: ['Yoga Center', 'Meditation Retreat', 'Ayurvedic Spa', 'Wellness Workshop'],
+                        wildlife: ['Bird Sanctuary', 'River Dolphin Watch', 'Nature Reserve', 'Guwahat']
+                    }
+                };
+
+                const defaultActivities = {
+                    morning: ['Heritage Walk', 'City Tour', 'Local Sightseeing', 'Photography Walk'],
+                    afternoon: ['Market Visit', 'Museum Tour', 'Art Gallery', 'Rest at Hotel'],
+                    evening: ['Cultural Show', 'Evening Walk', 'Sunset View', 'Local Entertainment'],
+                    adventure: ['Guided Tour', 'Local Experience', 'Outdoor Activity', 'Adventure Sport'],
+                    shopping: ['Local Market', 'Handicraft Shopping', 'Souvenir Hunt', 'Bazaar Visit'],
+                    spiritual: ['Temple Visit', 'Meditation', 'Spiritual Walk', 'Prayer Ceremony'],
+                    wellness: ['Spa Session', 'Yoga Class', 'Wellness Center', 'Relaxation Time'],
+                    wildlife: ['Nature Walk', 'Bird Watching', 'Park Visit', 'Wildlife Spotting']
+                };
+
+                const activities = destinationActivities[dest] || defaultActivities;
+
+                for (let day = 1; day <= days; day++) {
+                    const dayActivities = [];
+                    
+                    let morningAct = activities.morning[Math.floor(Math.random() * activities.morning.length)];
+                    dayActivities.push({
+                        time: '09:00 AM',
+                        title: morningAct,
+                        description: `Start your day exploring the beautiful ${morningAct}`,
+                        icon: 'fa-sun'
+                    });
+
+                    if (interests && interests.length > 0) {
+                        const randomInterest = interests[Math.floor(Math.random() * interests.length)].toLowerCase();
+                        const interestAct = activities[randomInterest] || activities.adventure;
+                        if (interestAct && interestAct.length > 0) {
+                            const actName = interestAct[Math.floor(Math.random() * interestAct.length)];
+                            dayActivities.push({
+                                time: '02:00 PM',
+                                title: actName,
+                                description: `Experience the best of ${dest} with this ${randomInterest} activity`,
+                                icon: 'fa-heart'
+                            });
+                        }
+                    }
+
+                    let eveningAct = activities.evening[Math.floor(Math.random() * activities.evening.length)];
+                    dayActivities.push({
+                        time: '07:00 PM',
+                        title: eveningAct,
+                        description: `End your day with a memorable ${eveningAct} experience`,
+                        icon: 'fa-moon'
+                    });
+
+                    itinerary.push({
+                        day: day,
+                        date: new Date(new Date(startDate).getTime() + (day - 1) * 86400000),
+                        activities: dayActivities
+                    });
+                }
+
+                return itinerary;
+            };
+
+            const days = duration || 7;
+            const itinerary = generateItinerary(destination, interests, days);
+
+            // Build the HTML
+            let membersHTML = '';
+            if (groupMembers && groupMembers.length > 0) {
+                membersHTML = groupMembers.map(member => `
+                    <div class="member-card">
+                        <div class="member-avatar">${member.initials}</div>
+                        <div class="member-info">
+                            <h4>${member.name}</h4>
+                            <p><i class="fas fa-user-check"></i> Travel Buddy</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            let interestsHTML = '';
+            if (interests && interests.length > 0) {
+                interestsHTML = interests.map(interest => `
+                    <span class="interest-tag">${interest}</span>
+                `).join('');
+            }
+
+            let itineraryHTML = '';
+            if (itinerary && itinerary.length > 0) {
+                itineraryHTML = itinerary.map(day => {
+                    const activitiesHTML = day.activities.map(act => `
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas ${act.icon}"></i>
+                            </div>
+                            <div class="activity-time">${act.time}</div>
+                            <div class="activity-content">
+                                <div class="activity-title">${act.title}</div>
+                                <div class="activity-desc">${act.description}</div>
+                            </div>
+                        </li>
+                    `).join('');
+
+                    const dateStr = day.date.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+
+                    return `
+                        <div class="day-card">
+                            <div class="day-header">
+                                <div class="day-title">
+                                    <i class="fas fa-calendar-day"></i>
+                                    Day ${day.day}
+                                </div>
+                                <div class="day-date">
+                                    <i class="far fa-calendar-alt"></i> ${dateStr}
+                                </div>
+                            </div>
+                            <ul class="activities-list">
+                                ${activitiesHTML}
+                            </ul>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Payment Bill HTML with Refund Policy and HOMEPAGE BUTTON added below Pay Advance
+            paymentBill.innerHTML = `
+                <div class="bill-header">
+                    <i class="fas fa-file-invoice"></i>
+                    <h2>Payment Summary</h2>
+                </div>
+                
+                <div class="bill-items">
+                    <div class="bill-item">
+                        <span class="label"><i class="fas fa-ticket-alt"></i> Base Package (${days} days)</span>
+                        <span class="value">₹${(basePricePerDay * days).toLocaleString()}</span>
+                    </div>
+                    <div class="bill-item">
+                        <span class="label"><i class="fas fa-hiking"></i> Activities (${days} days)</span>
+                        <span class="value">₹${(activityCostPerDay * days).toLocaleString()}</span>
+                    </div>
+                    <div class="bill-item">
+                        <span class="label"><i class="fas fa-bus"></i> Local Transport</span>
+                        <span class="value">₹${transportCost.toLocaleString()}</span>
+                    </div>
+                    <div class="bill-item">
+                        <span class="label"><i class="fas fa-user-tie"></i> Guide Fees</span>
+                        <span class="value">₹${guideFees.toLocaleString()}</span>
+                    </div>
+                    <div class="bill-item">
+                        <span class="label"><i class="fas fa-file-invoice"></i> GST (18%)</span>
+                        <span class="value">₹${gst.toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <div class="bill-total">
+                    <span class="label">Total Amount</span>
+                    <span class="amount">₹${totalAmount.toLocaleString()}</span>
+                </div>
+
+                <div class="per-person">
+                    <i class="fas fa-users"></i> Per person: ₹${perPersonAmount.toLocaleString()}
+                </div>
+
+                <div class="payment-status">
+                    <i class="fas fa-check-circle"></i>
+                    <span>50% advance required to confirm booking</span>
+                </div>
+
+                <button class="pay-now-btn" onclick="processPayment()">
+                    <i class="fas fa-lock"></i> Pay Advance (₹${advanceAmount.toLocaleString()})
+                </button>
+
+                <!-- NEW HOMEPAGE BUTTON - DIRECTS TO newindex.html WITHOUT ANY OTHER CHANGE -->
+                <a href="newindex.html" class="homepage-btn">
+                    <i class="fas fa-home"></i> Homepage
+                </a>
+
+                <div class="secure-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Payment • 128-bit SSL</span>
+                    <i class="fas fa-cc-visa"></i>
+                    <i class="fas fa-cc-mastercard"></i>
+                    <i class="fas fa-cc-amex"></i>
+                </div>
+
+                <div class="refund-policy">
+                    <h4><i class="fas fa-undo-alt"></i> Cancellation & Refund Policy</h4>
+                    <ul>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation more than 30 days before start:</strong> 90% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 15 - 30 days before start:</strong> 75% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 7 - 14 days before start:</strong> 50% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation 3 - 6 days before start:</strong> 25% Refund</li>
+                        <li><i class="fas fa-calendar-week"></i> <strong>Cancellation within 48 hours:</strong> No Refund</li>
+                        <li><i class="fas fa-exchange-alt"></i> Date change allowed once (free) up to 15 days prior</li>
+                    </ul>
+                    <div style="margin-top: 10px; font-size: 0.8rem; color: #b85c00;">
+                        <i class="fas fa-shield-alt"></i> Refund processed within 7-10 business days.
+                    </div>
+                </div>
+            `;
+
+            // Final Itinerary HTML with Pickup Location
+            itineraryContent.innerHTML = `
+                <div class="trip-summary">
+                    <div class="trip-header">
+                        <div class="destination-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${destination || 'Destination'}
+                        </div>
+                        <div class="trip-dates">
+                            <i class="far fa-calendar-alt"></i>
+                            ${formatDate(startDate)} - ${formatDate(endDate)}
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-value">${groupSize || 1}</div>
+                            <div class="stat-label">Group Members</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-value">${matchScore || 0}%</div>
+                            <div class="stat-label">Match Score</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-value">${days} Days</div>
+                            <div class="stat-label">Duration</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-value">${interests?.length || 0}</div>
+                            <div class="stat-label">Interests</div>
+                        </div>
+                    </div>
+
+                    <div class="pickup-location">
+                        <div class="pickup-icon">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        <div class="pickup-info">
+                            <h4><i class="fas fa-users"></i> Group Meeting Point</h4>
+                            <div class="pickup-address">
+                                <i class="fas fa-location-dot"></i> ${pickupInfo.address}
+                            </div>
+                            <div class="pickup-time">
+                                <i class="fas fa-clock"></i> Daily Meeting Time: ${pickupInfo.time}
+                            </div>
+                            <div class="pickup-time" style="margin-top: 5px;">
+                                <i class="fas fa-info-circle"></i> ${pickupInfo.instructions}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${membersHTML ? `
+                        <div class="group-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-user-friends"></i>
+                                Your Travel Buddies (${groupMembers.length})
+                            </h3>
+                            <div class="members-grid">
+                                ${membersHTML}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${interestsHTML ? `
+                        <div class="interests-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-heart"></i>
+                                Your Travel Interests
+                            </h3>
+                            <div class="interests-tags">
+                                ${interestsHTML}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <div class="itinerary-timeline">
+                        <h3 class="section-title">
+                            <i class="fas fa-map-signs"></i>
+                            Daily Itinerary
+                        </h3>
+                        ${itineraryHTML}
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.print()">
+                            <i class="fas fa-download"></i> Download Itinerary
+                        </button>
+                        <button class="btn btn-secondary" onclick="shareItinerary()">
+                            <i class="fas fa-share-alt"></i> Share with Group
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Share itinerary function
+        window.shareItinerary = function() {
+            const itineraryData = JSON.parse(sessionStorage.getItem('itineraryData'));
+            if (itineraryData) {
+                const shareText = `Check out our group trip to ${itineraryData.destination}! We have ${itineraryData.groupSize} people with a ${itineraryData.matchScore}% match score. Total cost per person: ₹${Math.round(calculateTotal() / itineraryData.groupSize).toLocaleString()}`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'My TripConnect Itinerary',
+                        text: shareText,
+                        url: window.location.href
+                    }).catch(() => {
+                        alert('Share cancelled');
+                    });
+                } else {
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        alert('Itinerary details copied to clipboard!');
+                    }).catch(() => {
+                        alert('Could not copy to clipboard');
+                    });
+                }
+            }
+        };
+
+        // Calculate total function for sharing
+        window.calculateTotal = function() {
+            const itineraryData = JSON.parse(sessionStorage.getItem('itineraryData'));
+            if (!itineraryData) return 0;
+            
+            const basePricePerDay = 2000;
+            const activityCostPerDay = 1500;
+            const transportCost = 3000;
+            const guideFees = 2000;
+            const days = itineraryData.duration || 7;
+            
+            const subtotal = (basePricePerDay * days) + (activityCostPerDay * days) + transportCost + guideFees;
+            const gst = Math.round(subtotal * 0.18);
+            return subtotal + gst;
+        };
+
+        // Process payment function
+        window.processPayment = function() {
+            const itineraryData = JSON.parse(sessionStorage.getItem('itineraryData'));
+            if (!itineraryData) {
+                alert('No itinerary data found');
+                return;
+            }
+            
+            const perPersonAmount = Math.round(calculateTotal() / (itineraryData.groupSize || 1));
+            const advanceAmount = Math.round(perPersonAmount / 2);
+            
+            alert(`✅ Payment processing...\n\nAdvance amount: ₹${advanceAmount.toLocaleString()}\n\nThis is a demo. In production, this would connect to a payment gateway.`);
+        };
+    </script>
+</body>
+</html>

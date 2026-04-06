@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripConnect - Package Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #2c3e50;
+    }
+
+    header {
+      background: white;
+      padding: 20px 40px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-top: 5px;
+    }
+
+    .details-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .details-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: #667eea;
+      margin-bottom: 25px;
+      transition: all 0.3s;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-back-btn:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .package-details-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .package-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      position: relative;
+    }
+
+    .package-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .package-destination {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .package-meta {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 30px;
+    }
+
+    .package-price-badge {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background: white;
+      color: #667eea;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .package-content {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+    }
+
+    .section-title i {
+      color: #667eea;
+    }
+
+    .overview-text {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 16px;
+      line-height: 1.8;
+      color: #555;
+      border-left: 4px solid #667eea;
+    }
+
+    /* Pickup Location Section - Fixed, not selectable */
+    .pickup-section {
+      background: linear-gradient(135deg, #e8f0fe 0%, #f0f4ff 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid #667eea;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pickup-section::before {
+      content: "🚐";
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      font-size: 80px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .pickup-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #4a6fa5;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pickup-title i {
+      font-size: 1.8rem;
+      color: #4a6fa5;
+    }
+
+    .pickup-location-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-left: 5px solid #4a6fa5;
+    }
+
+    .pickup-icon {
+      width: 60px;
+      height: 60px;
+      background: #e8f0fe;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .pickup-info {
+      flex: 1;
+    }
+
+    .pickup-name {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .pickup-address {
+      font-size: 0.9rem;
+      color: #5a6e7c;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pickup-time {
+      font-size: 0.85rem;
+      color: #4a6fa5;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pickup-note {
+      margin-top: 15px;
+      background: #fff8e0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: #b85c00;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .itinerary-container {
+      margin-top: 20px;
+    }
+
+    .day-card {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #e8f0fe;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .day-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-header {
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      padding: 20px 25px;
+      border-left: 5px solid #667eea;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .day-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .day-theme {
+      background: #667eea;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 25px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .day-content {
+      padding: 25px;
+      display: none;
+      border-top: 1px solid #e8f0fe;
+    }
+
+    .day-content.active {
+      display: block;
+    }
+
+    .day-description {
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .highlights-section {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .highlights-title {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .highlights-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      list-style: none;
+    }
+
+    .highlights-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .highlights-list li i {
+      color: #4CAF50;
+      font-size: 0.9rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s;
+      border: 1px solid #e8f0fe;
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-title i {
+      color: #667eea;
+    }
+
+    .info-content {
+      color: #666;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .feature-category {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 20px;
+      border-left: 4px solid #667eea;
+    }
+
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      color: #555;
+      font-size: 0.95rem;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-list li i {
+      color: #4CAF50;
+      font-size: 0.8rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-warning {
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      color: white;
+    }
+
+    .btn-warning:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 80px;
+      background: white;
+      border-radius: 24px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #e8f0fe;
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      text-align: center;
+      padding: 60px;
+      background: white;
+      border-radius: 24px;
+    }
+
+    .error-message h2 {
+      color: #e74c3c;
+      margin-bottom: 15px;
+    }
+
+    .error-message p {
+      color: #7f8c8d;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: white;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .package-header {
+        padding: 25px;
+      }
+
+      .package-title {
+        font-size: 1.8rem;
+      }
+
+      .package-price-badge {
+        position: static;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      .package-content {
+        padding: 25px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .day-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .highlights-list {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .pickup-location-card {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo">TripConnect</div>
+      <div class="tagline">Your Perfect Travel Companion</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="details-container" id="detailsContainer">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading your personalized itinerary...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>TripConnect &copy; 2026 | Your Perfect Travel Companion</p>
+  </footer>
+
+  <script>
+    const API_BASE_URL = 'http://localhost:5000/api';
+
+    function getPackageIdFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    }
+
+    async function fetchPackageDetails(packageId) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/packages/${packageId}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        if (data.success && data.package) return data.package;
+        throw new Error(data.message || 'Package not found');
+      } catch (error) {
+        console.error('Error fetching package details:', error);
+        throw error;
+      }
+    }
+
+    function getFixedPickupLocation(destination) {
+      const locationMap = {
+        'Jaipur': {
+          name: 'Jaipur Railway Station (Platform 1 Entrance)',
+          address: 'Station Road, Near Platform No. 1, Jaipur - 302001',
+          time: '8:00 AM (Sharp)',
+          icon: '🚂',
+          description: 'Main pickup point - Jaipur Junction. Our representative will be waiting at the main entrance with a TripConnect placard.'
+        },
+        'Goa': {
+          name: 'Goa International Airport (Dabolim) - Arrival Gate',
+          address: 'Dabolim, Goa - 403801',
+          time: '9:00 AM (Sharp)',
+          icon: '✈️',
+          description: 'Airport pickup point. Our vehicle will be waiting outside the arrival terminal with a TripConnect signboard.'
+        },
+        'Rishikesh': {
+          name: 'Rishikesh Railway Station - Main Gate',
+          address: 'Dehradun Road, Rishikesh - 249201',
+          time: '8:30 AM (Sharp)',
+          icon: '🚂',
+          description: 'Railway station pickup. Look for the TripConnect counter near the main exit.'
+        },
+        'Manali': {
+          name: 'Manali Bus Stand - Main Entrance',
+          address: 'Near Mall Road, Manali - 175131',
+          time: '9:30 AM (Sharp)',
+          icon: '🚌',
+          description: 'Bus stand pickup. Our representative will be at the main entrance with a TripConnect banner.'
+        },
+        'Ayodhya': {
+          name: 'Ayodhya Railway Junction - Main Gate',
+          address: 'Ayodhya - 224123',
+          time: '8:00 AM (Sharp)',
+          icon: '🛕',
+          description: 'Railway station pickup. Look for our representative at the main entrance gate.'
+        }
+      };
+
+      const defaultLocation = {
+        name: 'City Central Railway Station - Main Gate',
+        address: 'City Center, Near Clock Tower',
+        time: '8:30 AM (Sharp)',
+        icon: '🚂',
+        description: 'Central pickup point for all travelers. Our representative will be waiting with a TripConnect sign.'
+      };
+
+      return locationMap[destination] || defaultLocation;
+    }
+
+    function parseFeatures(featuresString) {
+      if (!featuresString) return [];
+      const features = featuresString.split(',').map(f => f.trim());
+      
+      const filteredFeatures = features.filter(f => {
+        const lower = f.toLowerCase();
+        return !lower.includes('food') && !lower.includes('meal') && 
+               !lower.includes('breakfast') && !lower.includes('lunch') &&
+               !lower.includes('dinner') && !lower.includes('accommodation') &&
+               !lower.includes('hotel') && !lower.includes('stay') &&
+               !lower.includes('resort') && !lower.includes('lodging');
+      });
+
+      const categories = {
+        'Activities & Experiences': [],
+        'Transportation': [],
+        'Guides & Services': [],
+        'Entry Tickets': [],
+        'Other Inclusions': []
+      };
+
+      filteredFeatures.forEach(feature => {
+        const lower = feature.toLowerCase();
+        if (lower.includes('transport') || lower.includes('transfer') || lower.includes('vehicle') || lower.includes('car')) {
+          categories['Transportation'].push(feature);
+        } else if (lower.includes('guide') || lower.includes('service') || lower.includes('assistance')) {
+          categories['Guides & Services'].push(feature);
+        } else if (lower.includes('entry') || lower.includes('ticket') || lower.includes('permit')) {
+          categories['Entry Tickets'].push(feature);
+        } else if (lower.includes('activity') || lower.includes('tour') || lower.includes('sightseeing') || lower.includes('visit')) {
+          categories['Activities & Experiences'].push(feature);
+        } else {
+          categories['Other Inclusions'].push(feature);
+        }
+      });
+
+      const result = [];
+      for (const [category, items] of Object.entries(categories)) {
+        if (items.length > 0) result.push({ category, items });
+      }
+      return result;
+    }
+
+    function generateItinerary(packageData) {
+      const duration = packageData.duration_days || 1;
+      const destination = packageData.destination || '';
+      const itinerary = [];
+
+      const destinationActivities = {
+        'Jaipur': {
+          morning: ['Amber Fort Exploration', 'City Palace Tour', 'Hawa Mahal Visit', 'Jantar Mantar Observation'],
+          afternoon: ['Local Bazaar Shopping', 'Elephant Village Visit', 'Textile Museum Tour', 'Art Gallery Visit'],
+          evening: ['Chokhi Dhani Cultural Experience', 'Light & Sound Show at Amber Fort', 'Sunset at Nahargarh', 'Folk Dance Performance']
+        },
+        'Goa': {
+          morning: ['Beach Yoga Session', 'Portuguese Heritage Walk', 'Spice Plantation Tour', 'Old Goa Churches Visit'],
+          afternoon: ['Water Sports Activities', 'Beach Hopping', 'Art & Craft Workshop', 'Casino Visit'],
+          evening: ['Sunset Cruise', 'Flea Market Exploration', 'Live Music Experience', 'Cultural Show']
+        },
+        'Rishikesh': {
+          morning: ['Ganga Aarti at Triveni Ghat', 'Yoga Session by the Ganges', 'Laxman Jhula Walk', 'Ram Jhula Exploration'],
+          afternoon: ['River Rafting Adventure', 'Ashram Visit', 'Beatles Ashram Tour', 'Local Market Visit'],
+          evening: ['Evening Ganga Aarti', 'Riverside Walk', 'Live Music Cafe', 'Sunset at Ganga Ghats']
+        },
+        'Manali': {
+          morning: ['Yoga at Sunrise', 'Himalayan Views Photography', 'Temple Visits', 'Nature Walk'],
+          afternoon: ['River Rafting', 'Local Sightseeing', 'Cafe Hopping', 'Photography Tour'],
+          evening: ['Bonfire Night', 'Local Music', 'Stargazing Session', 'Cultural Performance']
+        },
+        'Ayodhya': {
+          morning: ['Ram Janmabhoomi Temple Visit', 'Morning Aarti', 'Sarayu River Bath', 'Temple Tour'],
+          afternoon: ['Temple Hopping', 'Heritage Walk', 'Museum Visit', 'Cultural Center Exploration'],
+          evening: ['Evening Aarti', 'Cultural Show', 'Riverfront Walk', 'Light Ceremony']
+        }
+      };
+
+      const defaultActivities = {
+        morning: ['Heritage Walk', 'City Tour', 'Local Sightseeing', 'Photography Walk'],
+        afternoon: ['Market Visit', 'Museum Tour', 'Art Gallery Visit', 'Rest Break'],
+        evening: ['Cultural Show', 'Evening Walk', 'Sunset View', 'Local Entertainment']
+      };
+
+      const activities = destinationActivities[destination] || defaultActivities;
+
+      for (let day = 1; day <= duration; day++) {
+        let theme = '';
+        let morningAct = '';
+        let afternoonAct = '';
+        let eveningAct = '';
+
+        if (day === 1) {
+          theme = 'Arrival & Welcome';
+          morningAct = 'Arrival & Check-in';
+          afternoonAct = 'Welcome Orientation';
+          eveningAct = 'Leisure Time & Local Exploration';
+        } else if (day === duration) {
+          theme = 'Farewell';
+          morningAct = 'Last Day Activities';
+          afternoonAct = 'Final Sightseeing';
+          eveningAct = 'Departure Preparation';
+        } else {
+          theme = `Day ${day} Exploration`;
+          morningAct = activities.morning[Math.floor(Math.random() * activities.morning.length)];
+          afternoonAct = activities.afternoon[Math.floor(Math.random() * activities.afternoon.length)];
+          eveningAct = activities.evening[Math.floor(Math.random() * activities.evening.length)];
+        }
+
+        const highlights = [
+          `Expert guided tour of key attractions`,
+          `Photography opportunities at scenic spots`,
+          `Cultural immersion experiences`,
+          `Free time for personal exploration`
+        ];
+
+        itinerary.push({
+          day: day,
+          title: `Day ${day}: ${theme}`,
+          theme: theme,
+          morning: morningAct,
+          afternoon: afternoonAct,
+          evening: eveningAct,
+          description: `Experience the best of ${destination} on Day ${day}. ${morningAct} in the morning, followed by ${afternoonAct} in the afternoon, and end your day with ${eveningAct}.`,
+          highlights: highlights
+        });
+      }
+
+      return itinerary;
+    }
+
+    function getBestTime(destination) {
+      const dest = destination.toLowerCase();
+      if (dest.includes('goa')) return 'November to February';
+      if (dest.includes('jaipur')) return 'October to March';
+      if (dest.includes('manali')) return 'March to June';
+      if (dest.includes('rishikesh')) return 'February to May, September to November';
+      if (dest.includes('ayodhya')) return 'October to March';
+      return 'October to March';
+    }
+
+    function proceedWithBooking() {
+      const packageId = getPackageIdFromURL();
+      const destination = document.querySelector('.package-destination span')?.innerText || '';
+      const pickupLocation = getFixedPickupLocation(destination);
+      
+      const bookingData = {
+        package_id: packageId,
+        package_title: document.querySelector('.package-title')?.innerText || 'Package',
+        destination: destination,
+        start_date: null,
+        end_date: null,
+        travellers: 1,
+        price_per_person: parseInt(document.querySelector('.package-price-badge')?.innerText?.replace(/[^0-9]/g, '') || 0),
+        pickup_location: pickupLocation
+      };
+      
+      sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+      window.location.href = 'book-now.html';
+    }
+
+    function displayPackageDetails(packageData) {
+      const container = document.getElementById('detailsContainer');
+      const duration = packageData.duration_days || 1;
+      const itinerary = generateItinerary(packageData);
+      const features = parseFeatures(packageData.included_features);
+      const bestTime = getBestTime(packageData.destination);
+      const pickupLocation = getFixedPickupLocation(packageData.destination);
+
+      let itineraryHTML = '';
+      itinerary.forEach(day => {
+        itineraryHTML += `
+          <div class="day-card">
+            <div class="day-header" onclick="toggleDay(this)">
+              <div class="day-title">
+                <i class="fas fa-calendar-day"></i>
+                ${day.title}
+              </div>
+              <div class="day-theme">${day.theme}</div>
+            </div>
+            <div class="day-content">
+              <div class="day-description">
+                <i class="fas fa-clock"></i> <strong>Morning:</strong> ${day.morning}<br><br>
+                <i class="fas fa-sun"></i> <strong>Afternoon:</strong> ${day.afternoon}<br><br>
+                <i class="fas fa-moon"></i> <strong>Evening:</strong> ${day.evening}<br><br>
+                ${day.description}
+              </div>
+              <div class="highlights-section">
+                <div class="highlights-title">
+                  <i class="fas fa-star"></i> Day ${day.day} Highlights
+                </div>
+                <ul class="highlights-list">
+                  ${day.highlights.map(h => `<li><i class="fas fa-check-circle"></i> ${h}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      const pickupHTML = `
+        <div class="pickup-section">
+          <div class="pickup-title">
+            <i class="fas fa-map-pin"></i> 
+            <span>Group Pickup Location (Pre-Fixed)</span>
+          </div>
+          <div class="pickup-location-card">
+            <div class="pickup-icon">${pickupLocation.icon}</div>
+            <div class="pickup-info">
+              <div class="pickup-name">${pickupLocation.name}</div>
+              <div class="pickup-address"><i class="fas fa-location-dot"></i> ${pickupLocation.address}</div>
+              <div class="pickup-time"><i class="fas fa-clock"></i> Pickup Time: ${pickupLocation.time}</div>
+              <div style="margin-top: 8px; font-size: 0.85rem; color: #4a6fa5;">
+                <i class="fas fa-info-circle"></i> ${pickupLocation.description}
+              </div>
+            </div>
+          </div>
+          <div class="pickup-note">
+            <i class="fas fa-users"></i>
+            <span>All group members must gather at the designated pickup location by ${pickupLocation.time}. A dedicated vehicle will transport the group to the starting point of the itinerary. Please arrive 15 minutes early.</span>
+          </div>
+        </div>
+      `;
+
+      let featuresHTML = '';
+      if (features.length > 0) {
+        featuresHTML = `
+          <div class="section">
+            <h2 class="section-title"><i class="fas fa-gift"></i> What's Included</h2>
+            <div class="features-grid">
+              ${features.map(cat => `
+                <div class="feature-category">
+                  <div class="category-title">
+                    <i class="fas ${getCategoryIcon(cat.category)}"></i>
+                    ${cat.category}
+                  </div>
+                  <ul class="feature-list">
+                    ${cat.items.map(item => `<li><i class="fas fa-check"></i> ${item}</li>`).join('')}
+                  </ul>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      const summaryHTML = `
+        <div class="section">
+          <h2 class="section-title"><i class="fas fa-info-circle"></i> Package Information</h2>
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="info-title"><i class="fas fa-calendar-alt"></i> Duration</div>
+              <div class="info-content">${duration} Days ${duration-1} Nights</div>
+            </div>
+            <div class="info-card">
+              <div class="info-title"><i class="fas fa-users"></i> Group Size</div>
+              <div class="info-content">${packageData.min_travellers}-${packageData.max_travellers} People</div>
+            </div>
+            <div class="info-card">
+              <div class="info-title"><i class="fas fa-rupee-sign"></i> Price</div>
+              <div class="info-content">₹${packageData.price_per_person.toLocaleString()}/person</div>
+            </div>
+            <div class="info-card">
+              <div class="info-title"><i class="fas fa-umbrella-beach"></i> Best Time</div>
+              <div class="info-content">${bestTime}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = `
+        <a href="javascript:history.back()" class="details-back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Packages
+        </a>
+        <div class="package-details-card">
+          <div class="package-header">
+            <h1 class="package-title">${packageData.title}</h1>
+            <div class="package-destination">
+              <i class="fas fa-map-marker-alt"></i> <span>${packageData.destination}</span> | ${duration} Days ${duration-1} Nights
+            </div>
+            <div class="package-meta">
+              <div class="meta-item">
+                <i class="fas fa-users"></i>
+                <span>${packageData.min_travellers}-${packageData.max_travellers} travelers</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-rupee-sign"></i>
+                <span>Starting from ₹${packageData.price_per_person.toLocaleString()}/person</span>
+              </div>
+            </div>
+            <div class="package-price-badge">
+              ₹${packageData.price_per_person.toLocaleString()}<span style="font-size: 0.9rem;">/person</span>
+            </div>
+          </div>
+          
+          <div class="package-content">
+            ${pickupHTML}
+            
+            ${packageData.description ? `
+              <div class="section">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Package Overview</h2>
+                <div class="overview-text">${packageData.description}</div>
+              </div>
+            ` : ''}
+            
+            <div class="section">
+              <h2 class="section-title"><i class="fas fa-map-signs"></i> Complete ${duration}-Day Itinerary</h2>
+              <div class="itinerary-container">
+                ${itineraryHTML}
+              </div>
+            </div>
+            
+            ${featuresHTML}
+            ${summaryHTML}
+            
+            <div class="action-buttons">
+              <button class="btn btn-primary" onclick="window.print()">
+                <i class="fas fa-download"></i> Download Itinerary
+              </button>
+              <button class="btn btn-secondary" onclick="shareItinerary()">
+                <i class="fas fa-share-alt"></i> Share Package
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getCategoryIcon(category) {
+      const icons = {
+        'Activities & Experiences': 'fa-hiking',
+        'Transportation': 'fa-bus',
+        'Guides & Services': 'fa-user-tie',
+        'Entry Tickets': 'fa-ticket-alt',
+        'Other Inclusions': 'fa-gift'
+      };
+      return icons[category] || 'fa-check-circle';
+    }
+
+    function toggleDay(element) {
+      const content = element.nextElementSibling;
+      content.classList.toggle('active');
+    }
+
+    window.toggleDay = toggleDay;
+    window.proceedWithBooking = proceedWithBooking;
+
+    window.shareItinerary = function() {
+      const shareUrl = window.location.href;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'TripConnect Package',
+          text: 'Check out this amazing travel package!',
+          url: shareUrl
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          alert('Package link copied to clipboard!');
+        }).catch(() => {
+          alert('Could not copy to clipboard');
+        });
+      }
+    };
+
+    async function init() {
+      try {
+        const packageId = getPackageIdFromURL();
+        if (!packageId) {
+          throw new Error('No package ID specified');
+        }
+        
+        const packageData = await fetchPackageDetails(packageId);
+        displayPackageDetails(packageData);
+      } catch (error) {
+        console.error('Error:', error);
+        const container = document.getElementById('detailsContainer');
+        container.innerHTML = `
+          <a href="javascript:history.back()" class="details-back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Packages
+          </a>
+          <div class="error-message">
+            <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 20px;"></i>
+            <h2>Error Loading Package</h2>
+            <p>${error.message}</p>
+            <p>Please try again later or go back to browse other packages.</p>
+          </div>
+        `;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

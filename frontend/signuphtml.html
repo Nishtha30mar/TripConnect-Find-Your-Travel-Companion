@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TripConnect - Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="signupcss.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="gradient-circle circle-1"></div>
+    <div class="gradient-circle circle-2"></div>
+    <div class="gradient-circle circle-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Logo Header -->
+    <div class="logo-header">
+      <div class="logo">TripConnect</div>
+      <div class="tagline">
+        <span>India's Travel Community</span>
+        <span class="india-flag">🇮🇳</span>
+      </div>
+    </div>
+
+    <!-- Signup Card -->
+    <div class="signup-card">
+      <!-- Progress Steps -->
+      <div class="progress-steps">
+        <div class="step active" data-step="1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Basics</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Details</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Security</div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form id="signupForm">
+        <!-- Section 1: Basic Information -->
+        <div class="form-section active" id="section1">
+          <h2 class="section-title">
+            <i class="fas fa-user-circle"></i>
+            Basic Information
+          </h2>
+
+          <div class="form-grid">
+            <!-- User ID -->
+            <div class="form-group">
+              <label class="form-label" for="user_id">
+                <span>User ID</span>
+                <span class="required-star">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="user_id"
+                  class="form-input"
+                  placeholder="Create a unique user_id"
+                />
+                <i class="fas fa-user input-icon"></i>
+              </div>
+              <div class="error-message" id="user_idError">
+                <i class="fas fa-circle-exclamation"></i>
+                <span>Must be 4-20 characters</span>
+              </div>
+            </div>
+
+            <!-- Full Name -->
+            <div class="form-group">
+              <label class="form-label" for="name">
+                <span>Full Name</span>
+                <span class="required-star">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="name"
+                  class="form-input"
+                  placeholder="Enter your full name"
+                />
+                <i class="fas fa-id-card input-icon"></i>
+              </div>
+              <div class="error-message" id="nameError">
+                <i class="fas fa-circle-exclamation"></i>
+                <span>Please enter your full name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label" for="email">
+              <span>Email</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="email"
+                id="email"
+                class="form-input"
+                placeholder="Enter your email address"
+              />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="error-message" id="emailError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Invalid email format</span>
+            </div>
+          </div>
+
+          <!-- phone_number -->
+          <div class="form-group">
+            <label class="form-label" for="phone_number">
+              <span>Mobile Number</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <span class="phone_number-prefix">+91</span>
+              <input
+                type="tel"
+                id="phone_number"
+                class="form-input phone_number-input"
+                placeholder="10-digit Indian mobile number"
+                maxlength="10"
+              />
+              <i class="fas fa-phone_number input-icon"></i>
+            </div>
+            <div class="error-message" id="phone_numberError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>10-digit Indian mobile number required</span>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="form-navigation">
+            <button
+              type="button"
+              class="nav-btn btn-prev"
+              onclick="prevSection()"
+              disabled
+            >
+              <i class="fas fa-arrow-left"></i>
+              Back
+            </button>
+            <button
+              type="button"
+              class="nav-btn btn-next"
+              onclick="nextSection()"
+            >
+              Next
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 2: Personal Details -->
+        <div class="form-section" id="section2">
+          <h2 class="section-title">
+            <i class="fas fa-address-card"></i>
+            Personal Details
+          </h2>
+
+          <!-- DOB -->
+          <div class="form-group">
+            <label class="form-label" for="dob">
+              <span>Date of Birth</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="date"
+                id="dob"
+                class="form-input"
+                placeholder="DD/MM/YYYY"
+              />
+              <i class="fas fa-calendar input-icon"></i>
+            </div>
+            <div class="error-message" id="dobError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Must be at least 18 years old</span>
+            </div>
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>Gender</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="gender-options">
+              <div class="gender-option">
+                <button
+                  type="button"
+                  class="gender-btn"
+                  data-value="male"
+                >
+                  <i class="fas fa-mars"></i>
+                  <span>Male</span>
+                </button>
+              </div>
+              <div class="gender-option">
+                <button
+                  type="button"
+                  class="gender-btn"
+                  data-value="female"
+                >
+                  <i class="fas fa-venus"></i>
+                  <span>Female</span>
+                </button>
+              </div>
+              <div class="gender-option">
+                <button
+                  type="button"
+                  class="gender-btn"
+                  data-value="other"
+                >
+                  <i class="fas fa-genderless"></i>
+                  <span>Other</span>
+                </button>
+              </div>
+              
+            </div>
+            <div class="error-message" id="genderError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Please select a gender</span>
+            </div>
+          </div>
+
+          <!-- location -->
+          <div class="form-group">
+            <label class="form-label" for="location">
+              <span>Home location</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <select id="location" class="form-input">
+                <option value="">Select your location</option>
+                <option>Mumbai</option>
+                <option>Delhi</option>
+                <option>Bangalore</option>
+                <option>Chennai</option>
+                <option>Kolkata</option>
+                <option>Hyderabad</option>
+                <option>Pune</option>
+                <option>Ahmedabad</option>
+                <option>Jaipur</option>
+                <option>Other</option>
+              </select>
+              <i class="fas fa-location input-icon"></i>
+            </div>
+            <div class="error-message" id="locationError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Please select your location</span>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="form-navigation">
+            <button
+              type="button"
+              class="nav-btn btn-prev"
+              onclick="prevSection()"
+            >
+              <i class="fas fa-arrow-left"></i>
+              Back
+            </button>
+            <button
+              type="button"
+              class="nav-btn btn-next"
+              onclick="nextSection()"
+            >
+              Next
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 3: Account Security -->
+        <div class="form-section" id="section3">
+          <h2 class="section-title">
+            <i class="fas fa-shield-alt"></i>
+            Account Security
+          </h2>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label" for="password">
+              <span>Password</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="password"
+                id="password"
+                class="form-input"
+                placeholder="Create a strong password"
+              />
+              <i class="fas fa-lock input-icon"></i>
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="Toggle password visibility"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength">
+              <div class="strength-meter">
+                <div class="strength-bar" id="strengthBar"></div>
+              </div>
+              <div class="strength-text" id="strengthText">
+                Password strength
+              </div>
+            </div>
+            <div class="error-message" id="passwordError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Minimum 8 characters required</span>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">
+              <span>Confirm Password</span>
+              <span class="required-star">*</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="password"
+                id="confirmPassword"
+                class="form-input"
+                placeholder="Re-enter your password"
+              />
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+            <div class="error-message" id="confirmPasswordError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>Passwords don't match</span>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="terms-container">
+            <label class="terms-checkbox">
+              <input type="checkbox" id="terms" />
+              <span class="terms-text">
+                I agree to the
+                <a href="#" target="_blank">Terms of Service</a>
+                and
+                <a href="#" target="_blank">Privacy Policy</a>.
+                I confirm that I am an Indian resident and will use
+                TripConnect for travel within India.
+              </span>
+            </label>
+            <div class="error-message" id="termsError">
+              <i class="fas fa-circle-exclamation"></i>
+              <span>You must accept the terms</span>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="form-navigation">
+            <button
+              type="button"
+              class="nav-btn btn-prev"
+              onclick="prevSection()"
+            >
+              <i class="fas fa-arrow-left"></i>
+              Back
+            </button>
+            <button type="submit" class="nav-btn btn-submit">
+              <span>Create Account</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <div class="success-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h2 class="success-title">Welcome to TripConnect India!</h2>
+        <p class="success-text">
+          Your account has been created successfully. Explore amazing travel
+          destinations across India!
+        </p>
+        <div class="success-details" id="successDetails"></div>
+        <a href="index.html" class="nav-btn btn-next" onclick="setAuthState(true, false);">
+          Explore India <i class="fas fa-compass"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authentication Functions -->
+  <script>
+    function getAuthState() {
+      return JSON.parse(localStorage.getItem('tripConnectAuth') || '{"signedUp": false, "loggedIn": false}');
+    }
+
+    function setAuthState(signedUp, loggedIn) {
+      localStorage.setItem('tripConnectAuth', JSON.stringify({signedUp: signedUp, loggedIn: loggedIn}));
+    }
+  </script>
+
+  <script src="signupjs.js"></script>
+</body>
+</html>

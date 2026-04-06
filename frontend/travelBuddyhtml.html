@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripConnect - Find Your Travel Buddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="travelbuddycss.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fas fa-route logo-icon"></i>
+                <h1>TripConnect</h1>
+            </div>
+            <p class="tagline">Find Your Perfect Travel Companion</p>
+        </header>
+      
+                <button class="cta-button" id="findBuddiesBtn">
+                    <i class="fas fa-search"></i> Find Your Travel Group
+                </button>
+            </div>
+            
+            <!-- Right Panel: Matches & Groups -->
+            <div class="matches-section">
+                <h2 class="section-title"><i class="fas fa-handshake"></i> Your Travel Group</h2>
+                <p class="section-description">Our intelligent algorithm finds the perfect travel group for you based on your preferences.</p>
+                
+                <div class="matches-container" id="matchesContainer">
+                    <!-- Group or matches will be populated here -->
+                </div>
+                
+                <div id="noMatchesMessage" class="no-matches-message">
+                    <i class="fas fa-search"></i>
+                    <h3>No group found yet</h3>
+                    <p>Click "Find Travel Buddies" to find your perfect travel group!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group Invitation Modal -->
+        <div class="group-modal" id="groupModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-users"></i> Group Formation Invitation</h2>
+                    <p>You've been matched with compatible travelers!</p>
+                </div>
+                
+                <div class="match-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalMatchScore">94%</div>
+                        <div class="stat-label">Match Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalGroupSize">5</div>
+                        <div class="stat-label">Group Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalCommonInterests">4</div>
+                        <div class="stat-label">Common Interests</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalTripDates">7 Days</div>
+                        <div class="stat-label">Trip Duration</div>
+                    </div>
+                </div>
+                
+                <div class="modal-destination-info">
+                    <h4><i class="fas fa-map-marker-alt"></i> Destination: <span id="modalDestination">Goa, India</span></h4>
+                    <p><i class="fas fa-calendar"></i> Dates: <span id="modalDates">Dec 15-22, 2026</span></p>
+                </div>
+                
+                <div class="group-members" id="modalMembers">
+                    <!-- Group members will be populated here -->
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-reject" id="rejectGroupBtn">
+                        <i class="fas fa-times"></i> Reject Group
+                    </button>
+                    <button class="modal-btn modal-accept" id="acceptGroupBtn">
+                        <i class="fas fa-check"></i> Accept & Join Group
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>TripConnect &copy; 2026 | Intelligent Travel Buddy Matching</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Safety & Verification</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> 24/7 Support</a>
+                <a href="#"><i class="fas fa-question-circle"></i> How It Works</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="travelBuddyjs.js"></script>
+</body>
+</html>

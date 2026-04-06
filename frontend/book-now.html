@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TripConnect - Secure Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: white;
+      border-radius: 20px;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .back-btn {
+      padding: 10px 20px;
+      background: #f0f4ff;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 450px;
+      gap: 30px;
+    }
+
+    @media (max-width: 968px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .payment-section {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e8f0fe;
+    }
+
+    .section-title i {
+      color: #667eea;
+    }
+
+    .payment-methods {
+      margin: 25px 0;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+
+    .payment-method:hover {
+      border-color: #667eea;
+      background: #f8f9fa;
+      transform: translateX(5px);
+    }
+
+    .payment-method.selected {
+      border-color: #2ecc71;
+      background: #f0fff4;
+    }
+
+    .payment-method i {
+      font-size: 2rem;
+      width: 50px;
+    }
+
+    .payment-method .fa-google-pay { color: #4285F4; }
+    .payment-method .fa-phone-alt { color: #e67e22; }
+    .payment-method .fa-university { color: #2c3e50; }
+    .payment-method .fa-wallet { color: #9b59b6; }
+
+    .payment-method-info {
+      flex: 1;
+    }
+
+    .payment-method-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .payment-method-desc {
+      font-size: 0.85rem;
+      color: #7f8c8d;
+    }
+
+    .payment-note {
+      background: #e8f0fe;
+      padding: 15px;
+      border-radius: 12px;
+      margin: 20px 0;
+      text-align: center;
+      color: #667eea;
+      font-size: 0.9rem;
+    }
+
+    .pay-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      margin-top: 25px;
+    }
+
+    .pay-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .pay-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Homepage button styling */
+    .homepage-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      margin-top: 15px;
+      text-decoration: none;
+    }
+
+    .homepage-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #764ba2, #667eea);
+    }
+
+    .summary-section {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    .trip-details {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .trip-detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    .trip-detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .trip-detail-label {
+      color: #7f8c8d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trip-detail-value {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .price-breakdown {
+      margin: 20px 0;
+    }
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      color: #555;
+    }
+
+    .price-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      margin-top: 10px;
+      border-top: 2px solid #e8f0fe;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #2ecc71;
+    }
+
+    .refund-policy {
+      background: #fef8e7;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 25px;
+      border: 1px solid #ffe0b3;
+    }
+
+    .refund-policy h4 {
+      color: #e67e22;
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .refund-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .refund-table th {
+      background: #ffedd5;
+      padding: 10px 8px;
+      text-align: left;
+      color: #b85c00;
+      font-weight: 600;
+      border-bottom: 2px solid #fed7aa;
+    }
+
+    .refund-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #fed7aa;
+      color: #5a3a1a;
+    }
+
+    .refund-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .highlight-refund {
+      font-weight: 700;
+      color: #2ecc71;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 450px;
+      text-align: center;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content i {
+      font-size: 4rem;
+      color: #2ecc71;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+
+    .booking-code {
+      background: #f0f4ff;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin: 15px 0;
+    }
+
+    .modal-btn {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: white;
+    }
+
+    .date-warning {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #856404;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border: 1px solid #2196f3;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #0c5460;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">TripConnect</div>
+      <a href="javascript:history.back()" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Packages
+      </a>
+    </header>
+
+    <div class="main-layout">
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2 class="section-title">
+          <i class="fas fa-wallet"></i> Select Payment Method
+        </h2>
+
+        <div class="payment-methods">
+          <div class="payment-method selected" data-method="gpay">
+            <i class="fab fa-google-pay"></i>
+            <div class="payment-method-info">
+              <div class="payment-method-name">Google Pay</div>
+              <div class="payment-method-desc">Pay using Google Pay UPI</div>
+            </div>
+          </div>
+          <div class="payment-method" data-method="phonepe">
+            <i class="fas fa-phone-alt"></i>
+            <div class="payment-method-info">
+              <div class="payment-method-name">PhonePe</div>
+              <div class="payment-method-desc">Pay using PhonePe</div>
+            </div>
+          </div>
+          <div class="payment-method" data-method="paytm">
+            <i class="fas fa-wallet"></i>
+            <div class="payment-method-info">
+              <div class="payment-method-name">Paytm</div>
+              <div class="payment-method-desc">Pay using Paytm Wallet / UPI</div>
+            </div>
+          </div>
+          <div class="payment-method" data-method="netbanking">
+            <i class="fas fa-university"></i>
+            <div class="payment-method-info">
+              <div class="payment-method-name">Net Banking</div>
+              <div class="payment-method-desc">All major banks</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-note">
+          <i class="fas fa-shield-alt"></i> Secure payment powered by RBI-approved payment gateways
+        </div>
+
+        <div class="button-group">
+          <button class="pay-btn" id="payBtn">
+            <i class="fas fa-rupee-sign"></i> Proceed to Pay
+          </button>
+          <a href="newindex.html" class="homepage-btn">
+            <i class="fas fa-home"></i> Back to Homepage
+          </a>
+        </div>
+      </div>
+
+      <!-- Booking Summary Section -->
+      <div class="summary-section" id="summarySection">
+        <h2 class="section-title">
+          <i class="fas fa-receipt"></i> Booking Summary
+        </h2>
+        <div id="summaryContent">
+          <div style="text-align: center; padding: 30px;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #667eea;"></i>
+            <p style="margin-top: 15px; color: #7f8c8d;">Loading booking details...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p><i class="fas fa-shield-alt"></i> 128-bit SSL Secure Payment | <i class="fas fa-lock"></i> PCI-DSS Compliant</p>
+    </footer>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <i class="fas fa-check-circle"></i>
+      <h3>Payment Successful!</h3>
+      <p>Your booking has been confirmed</p>
+      <div class="booking-code" id="bookingCode">BOOK-2026-XXXX</div>
+      <p style="font-size: 0.85rem;">A confirmation email has been sent to your registered email</p>
+      <button class="modal-btn" onclick="goToItinerary()">
+        <i class="fas fa-map-marked-alt"></i> View Itinerary
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // API base URL
+    const API_BASE_URL = 'http://localhost:5000/api';
+    let selectedPaymentMethod = 'gpay';
+    let userTravelPreferences = null;
+    let packageData = null;
+
+    // Helper functions
+    function generateBookingCode() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return `BOOK-${code}`;
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'Not specified';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Calculate travel dates based on package duration within user's available range
+    function calculateTravelDates(packageDurationDays, userStartDateStr, userEndDateStr) {
+      if (!userStartDateStr || !userEndDateStr) {
+        console.log('No user date range available');
+        return { startDate: null, endDate: null, error: 'No date range available' };
+      }
+
+      const userStartDate = new Date(userStartDateStr);
+      const userEndDate = new Date(userEndDateStr);
+      const userAvailableDays = Math.ceil((userEndDate - userStartDate) / (1000 * 60 * 60 * 24)) + 1;
+      
+      console.log(`Package duration: ${packageDurationDays} days`);
+      console.log(`User available range: ${userAvailableDays} days (${formatDate(userStartDateStr)} to ${formatDate(userEndDateStr)})`);
+      
+      // Check if package duration fits within user's available dates
+      if (packageDurationDays > userAvailableDays) {
+        return { 
+          startDate: userStartDate, 
+          endDate: userEndDate, 
+          warning: `Package duration (${packageDurationDays} days) is longer than your available travel dates (${userAvailableDays} days). Please adjust your travel dates.`
+        };
+      }
+      
+      // Calculate start date - use the user's start date as the travel start date
+      const travelStartDate = new Date(userStartDate);
+      const travelEndDate = new Date(travelStartDate);
+      travelEndDate.setDate(travelStartDate.getDate() + (packageDurationDays - 1));
+      
+      // Check if the calculated end date is within user's available range
+      if (travelEndDate > userEndDate) {
+        // If end date exceeds user's available range, shift the start date back
+        const daysExceed = Math.ceil((travelEndDate - userEndDate) / (1000 * 60 * 60 * 24));
+        travelStartDate.setDate(travelStartDate.getDate() - daysExceed);
+        travelEndDate.setDate(travelEndDate.getDate() - daysExceed);
+        
+        console.log(`Adjusted dates to fit within range: ${formatDate(travelStartDate)} to ${formatDate(travelEndDate)}`);
+      }
+      
+      console.log(`Final travel dates: ${formatDate(travelStartDate)} to ${formatDate(travelEndDate)} (${packageDurationDays} days)`);
+      
+      return {
+        startDate: travelStartDate,
+        endDate: travelEndDate,
+        startDateStr: travelStartDate.toISOString().split('T')[0],
+        endDateStr: travelEndDate.toISOString().split('T')[0],
+        info: `Your ${packageDurationDays}-day trip will take place during this period.`
+      };
+    }
+
+    // Get user's travel preferences from database
+    async function getUserTravelPreferences() {
+      try {
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+          console.log('No user logged in');
+          return null;
+        }
+
+        const user = JSON.parse(userData);
+        const userId = user.user_id || user.id;
+        
+        if (!userId) {
+          console.log('No user ID found');
+          return null;
+        }
+
+        console.log('Fetching preferences for user ID:', userId);
+        
+        const response = await fetch(`${API_BASE_URL}/preferences/latest?user_id=${userId}`);
+        const data = await response.json();
+        
+        if (data.success && data.preferences) {
+          console.log('Retrieved user preferences:', data.preferences);
+          console.log('Travelers count from preferences:', data.preferences.travelers_count);
+          console.log('Start date from preferences:', data.preferences.start_date);
+          console.log('End date from preferences:', data.preferences.end_date);
+          return data.preferences;
+        } else {
+          console.log('No preferences found for user');
+          return null;
+        }
+      } catch (error) {
+        console.error('Error fetching user preferences:', error);
+        return null;
+      }
+    }
+
+    // Get package details from API
+    async function getPackageDetails(packageId) {
+      try {
+        console.log('Fetching package details for ID:', packageId);
+        const response = await fetch(`${API_BASE_URL}/packages/${packageId}`);
+        const data = await response.json();
+        
+        if (data.success && data.package) {
+          console.log('Retrieved package details:', data.package);
+          console.log('Package duration:', data.package.duration_days);
+          console.log('Package price:', data.package.price_per_person);
+          return data.package;
+        } else {
+          console.log('Package not found');
+          return null;
+        }
+      } catch (error) {
+        console.error('Error fetching package details:', error);
+        return null;
+      }
+    }
+
+    // Calculate refund percentage based on days before start
+    function getRefundPercentage(daysBeforeStart) {
+      if (daysBeforeStart > 30) return 90;
+      if (daysBeforeStart >= 15 && daysBeforeStart <= 30) return 75;
+      if (daysBeforeStart >= 7 && daysBeforeStart <= 14) return 50;
+      if (daysBeforeStart >= 3 && daysBeforeStart <= 6) return 25;
+      if (daysBeforeStart >= 1 && daysBeforeStart <= 2) return 10;
+      return 0;
+    }
+
+    // Load booking data and display summary with pricing and refund policy
+    async function loadBookingData() {
+      try {
+        // Get booking data from sessionStorage (package info from package selection)
+        let bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
+        
+        if (!bookingData) {
+          document.getElementById('summaryContent').innerHTML = `
+            <div style="text-align: center; padding: 30px;">
+              <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #e74c3c;"></i>
+              <p style="margin-top: 15px; color: #7f8c8d;">No booking data found. Please select a package first.</p>
+              <a href="destinationhtml.html" class="back-btn" style="margin-top: 20px; display: inline-block;">
+                <i class="fas fa-search"></i> Browse Packages
+              </a>
+            </div>
+          `;
+          document.getElementById('payBtn').disabled = true;
+          return;
+        }
+
+        console.log('Booking data from session:', bookingData);
+        
+        // Get complete package details including duration_days
+        packageData = await getPackageDetails(bookingData.package_id);
+        
+        if (!packageData) {
+          document.getElementById('summaryContent').innerHTML = `
+            <div style="text-align: center; padding: 30px;">
+              <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #e74c3c;"></i>
+              <p style="margin-top: 15px; color: #7f8c8d;">Package details not found. Please try again.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Get user's travel preferences from database
+        userTravelPreferences = await getUserTravelPreferences();
+        
+        // Get package duration from package table
+        const packageDurationDays = packageData.duration_days;
+        console.log('Package duration from packages table:', packageDurationDays);
+        
+        let startDate = null;
+        let endDate = null;
+        let dateWarning = null;
+        let dateInfo = null;
+        let travelersCount = 1; // Default fallback
+        
+        // CRITICAL: Get travelers count from user preferences
+        if (userTravelPreferences && userTravelPreferences.travelers_count) {
+          travelersCount = parseInt(userTravelPreferences.travelers_count);
+          console.log('✅ Travelers count from preferences (travelers_count):', travelersCount);
+        } else if (userTravelPreferences && userTravelPreferences.travelers) {
+          // Check for alternate field name
+          travelersCount = parseInt(userTravelPreferences.travelers);
+          console.log('✅ Travelers count from preferences (travelers):', travelersCount);
+        } else if (bookingData.travellers) {
+          travelersCount = parseInt(bookingData.travellers);
+          console.log('⚠️ Travelers count from booking data:', travelersCount);
+        } else {
+          console.log('❌ No travelers count found, using default: 1');
+        }
+        
+        console.log('Final travelers count to be used:', travelersCount);
+        
+        // Calculate travel dates based on package duration and user's preferred date range
+        if (userTravelPreferences && userTravelPreferences.start_date && userTravelPreferences.end_date) {
+          console.log('User preferences dates:', {
+            start: userTravelPreferences.start_date,
+            end: userTravelPreferences.end_date
+          });
+          
+          const calculatedDates = calculateTravelDates(
+            packageDurationDays,
+            userTravelPreferences.start_date,
+            userTravelPreferences.end_date
+          );
+          
+          if (calculatedDates.startDate && calculatedDates.endDate) {
+            startDate = calculatedDates.startDate;
+            endDate = calculatedDates.endDate;
+            dateWarning = calculatedDates.warning;
+            dateInfo = calculatedDates.info;
+          }
+        } else {
+          console.log('No user preferences with dates found');
+          
+          // Try to get dates from sessionStorage as fallback
+          const lastSearchParams = sessionStorage.getItem('lastSearchParams');
+          if (lastSearchParams) {
+            const searchParams = JSON.parse(lastSearchParams);
+            if (searchParams.startDate && searchParams.endDate) {
+              // Calculate dates based on package duration
+              const userStartDate = new Date(searchParams.startDate);
+              const travelEndDate = new Date(userStartDate);
+              travelEndDate.setDate(userStartDate.getDate() + (packageDurationDays - 1));
+              startDate = userStartDate;
+              endDate = travelEndDate;
+              console.log('Using dates from search params adjusted for duration:', { startDate, endDate });
+            }
+          }
+        }
+        
+        // If still no dates, use booking data dates as last resort and adjust for duration
+        if (!startDate && bookingData.start_date) {
+          startDate = new Date(bookingData.start_date);
+          endDate = new Date(startDate);
+          endDate.setDate(startDate.getDate() + (packageDurationDays - 1));
+          console.log('Using dates from booking data adjusted for duration:', { startDate, endDate });
+        }
+        
+        // Calculate pricing
+        const travellers = travelersCount;
+        
+        // Get price per person from package data
+        let pricePerPerson = parseFloat(packageData.price_per_person);
+        
+        // Fix inflated prices (if price seems to have an extra zero)
+        if (pricePerPerson > 100000 && pricePerPerson < 1000000) {
+          console.log(`Price seems inflated: ${pricePerPerson}, adjusting...`);
+          pricePerPerson = pricePerPerson / 10;
+          console.log(`Adjusted price: ${pricePerPerson}`);
+        }
+        
+        const subtotal = pricePerPerson * travellers;
+        const gst = Math.round(subtotal * 0.18);
+        const totalAmount = subtotal + gst;
+        const advanceAmount = Math.round(totalAmount * 0.5);
+        
+        // Calculate duration in days from package
+        const durationDays = packageDurationDays;
+        
+        // Calculate days until trip for refund preview
+        let daysUntilTrip = null;
+        if (startDate) {
+          const tripStartDate = new Date(startDate);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const diffTime = tripStartDate - today;
+          daysUntilTrip = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+        
+        const refundPercent = daysUntilTrip ? getRefundPercentage(daysUntilTrip) : 90;
+        const estimatedRefund = Math.round(totalAmount * refundPercent / 100);
+        
+        // Create warning HTML if needed
+        let warningHTML = '';
+        if (dateWarning) {
+          warningHTML = `
+            <div class="date-warning">
+              <i class="fas fa-exclamation-triangle"></i> ${dateWarning}
+            </div>
+          `;
+        }
+        
+        let infoHTML = '';
+        if (dateInfo) {
+          infoHTML = `
+            <div class="info-box">
+              <i class="fas fa-info-circle"></i> ${dateInfo}
+            </div>
+          `;
+        }
+        
+        const summaryHTML = `
+          <div class="trip-details">
+            <h4 style="margin-bottom: 15px; color: #2c3e50;"><i class="fas fa-suitcase"></i> Trip Details</h4>
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-tag"></i> Package</span>
+              <span class="trip-detail-value">${escapeHtml(packageData.title)}</span>
+            </div>
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-map-marker-alt"></i> Destination</span>
+              <span class="trip-detail-value">${escapeHtml(packageData.destination)}</span>
+            </div>
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-calendar-alt"></i> Travel Dates</span>
+              <span class="trip-detail-value"><strong>${startDate ? formatDate(startDate.toISOString().split('T')[0]) : 'Not specified'} - ${endDate ? formatDate(endDate.toISOString().split('T')[0]) : 'Not specified'}</strong></span>
+            </div>
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-clock"></i> Package Duration</span>
+              <span class="trip-detail-value"><strong>${durationDays} days</strong></span>
+            </div>
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-users"></i> Travelers</span>
+              <span class="trip-detail-value"><strong>${travellers} ${travellers === 1 ? 'Person' : 'People'}</strong></span>
+            </div>
+            ${userTravelPreferences && userTravelPreferences.start_date ? `
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-calendar-week"></i> Your Available Dates</span>
+              <span class="trip-detail-value">${formatDate(userTravelPreferences.start_date)} - ${formatDate(userTravelPreferences.end_date)}</span>
+            </div>
+            ` : ''}
+            ${userTravelPreferences && userTravelPreferences.travelers_count ? `
+            <div class="trip-detail-item">
+              <span class="trip-detail-label"><i class="fas fa-user-friends"></i> Your Group Size</span>
+              <span class="trip-detail-value">${userTravelPreferences.travelers_count} people</span>
+            </div>
+            ` : ''}
+          </div>
+          ${warningHTML}
+          ${infoHTML}
+
+          <div class="price-breakdown">
+            <h4 style="margin-bottom: 15px; color: #2c3e50;"><i class="fas fa-rupee-sign"></i> Price Breakdown</h4>
+            <div class="price-item">
+              <span>Price Per Person</span>
+              <span><strong>₹${pricePerPerson.toLocaleString('en-IN')}</strong></span>
+            </div>
+            <div class="price-item">
+              <span>Subtotal (${travellers} × ₹${pricePerPerson.toLocaleString('en-IN')})</span>
+              <span>₹${subtotal.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="price-item">
+              <span>GST (18%)</span>
+              <span>₹${gst.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="price-total">
+              <span><i class="fas fa-total"></i> Total Amount</span>
+              <span style="font-size: 1.3rem;">₹${totalAmount.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="price-item" style="border-top: 1px dashed #e0e0e0; margin-top: 10px; padding-top: 12px;">
+              <span>💰 Advance Payment (50%)</span>
+              <span style="color: #2ecc71; font-weight: 700;">₹${advanceAmount.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="price-item">
+              <span>💳 Balance Payable (at check-in)</span>
+              <span>₹${(totalAmount - advanceAmount).toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+
+          <div class="refund-policy">
+            <h4><i class="fas fa-undo-alt"></i> Cancellation & Refund Policy</h4>
+            <table class="refund-table">
+              <thead>
+                <tr><th>Cancellation before start date</th><th>Refund %</th><th>Refund Amount (on ₹${totalAmount.toLocaleString('en-IN')})</th> </thead>
+              <tbody>
+                <tr><td>📅 More than 30 days</td><td class="highlight-refund">90%</td><td>₹${Math.round(totalAmount * 0.9).toLocaleString('en-IN')}</td> </tr>
+                <tr><td>📅 15 - 30 days</td><td>75%</td><td>₹${Math.round(totalAmount * 0.75).toLocaleString('en-IN')}</td> </tr>
+                <tr><td>📅 7 - 14 days</td><td>50%</td><td>₹${Math.round(totalAmount * 0.5).toLocaleString('en-IN')}</td> </tr>
+                <tr><td>📅 3 - 6 days</td><td>25%</td><td>₹${Math.round(totalAmount * 0.25).toLocaleString('en-IN')}</td> </tr>
+                <tr><td>📅 1 - 2 days</td><td>10%</td><td>₹${Math.round(totalAmount * 0.1).toLocaleString('en-IN')}</td> </tr>
+                <tr><td>⚠️ Within 48 hours / No-show</td><td>0%</td><td>₹0</td> </tr>
+              </tbody>
+            </table>
+            <div style="margin-top: 14px; font-size: 0.8rem; background: #fff3e0; padding: 10px; border-radius: 12px;">
+              <i class="fas fa-info-circle"></i> <strong>Today's estimated refund:</strong> 
+              ${daysUntilTrip ? `If cancelled now (${daysUntilTrip} days before trip) → ${refundPercent}% refund = <strong>₹${estimatedRefund.toLocaleString('en-IN')}</strong>` : 'Refund depends on cancellation date'}
+            </div>
+            <div style="margin-top: 8px; font-size: 0.75rem; color: #b85c00;">
+              <i class="fas fa-exchange-alt"></i> Free date change (once) allowed up to 15 days prior • Refund processed in 7-10 working days
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('summaryContent').innerHTML = summaryHTML;
+        
+        // Store additional data for payment processing
+        window.currentBookingData = {
+          ...bookingData,
+          package_title: packageData.title,
+          package_duration: packageDurationDays,
+          start_date: startDate ? startDate.toISOString().split('T')[0] : null,
+          end_date: endDate ? endDate.toISOString().split('T')[0] : null,
+          total_price: totalAmount,
+          subtotal: subtotal,
+          gst: gst,
+          price_per_person: pricePerPerson,
+          duration_days: durationDays,
+          travellers: travellers
+        };
+        window.advanceAmount = advanceAmount;
+        window.totalPrice = totalAmount;
+        
+        console.log('Final booking data:', window.currentBookingData);
+        console.log('✅ Travelers count used:', travellers);
+        
+      } catch (error) {
+        console.error('Error loading booking data:', error);
+        document.getElementById('summaryContent').innerHTML = `
+          <div style="text-align: center; padding: 30px;">
+            <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #e74c3c;"></i>
+            <p style="margin-top: 15px; color: #7f8c8d;">Error loading booking details: ${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function setupPaymentMethods() {
+      const methods = document.querySelectorAll('.payment-method');
+      methods.forEach(method => {
+        method.addEventListener('click', function() {
+          methods.forEach(m => m.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedPaymentMethod = this.getAttribute('data-method');
+        });
+      });
+    }
+
+    async function processPayment() {
+      if (!window.currentBookingData) {
+        alert('No booking data found. Please refresh and try again.');
+        return;
+      }
+      
+      const payBtn = document.getElementById('payBtn');
+      const originalText = payBtn.innerHTML;
+      payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment...';
+      payBtn.disabled = true;
+      
+      try {
+        // Simulate payment processing
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        const bookingCode = generateBookingCode();
+        
+        const booking = {
+          booking_code: bookingCode,
+          package_id: window.currentBookingData.package_id,
+          package_title: window.currentBookingData.package_title,
+          destination: window.currentBookingData.destination,
+          start_date: window.currentBookingData.start_date,
+          end_date: window.currentBookingData.end_date,
+          duration_days: window.currentBookingData.duration_days,
+          travellers: window.currentBookingData.travellers,
+          price_per_person: window.currentBookingData.price_per_person,
+          subtotal: window.currentBookingData.subtotal,
+          gst: window.currentBookingData.gst,
+          total_amount: window.currentBookingData.total_price,
+          advance_paid: window.advanceAmount,
+          payment_method: selectedPaymentMethod,
+          payment_date: new Date().toISOString(),
+          status: 'confirmed'
+        };
+        
+        // Save to localStorage
+        let bookings = JSON.parse(localStorage.getItem('trip_bookings') || '[]');
+        bookings.push(booking);
+        localStorage.setItem('trip_bookings', JSON.stringify(bookings));
+        
+        sessionStorage.setItem('currentBooking', JSON.stringify(booking));
+        
+        document.getElementById('bookingCode').textContent = bookingCode;
+        document.getElementById('successModal').style.display = 'flex';
+        
+        payBtn.innerHTML = originalText;
+        payBtn.disabled = false;
+        
+      } catch (error) {
+        console.error('Payment error:', error);
+        alert('Payment failed. Please try again.');
+        payBtn.innerHTML = originalText;
+        payBtn.disabled = false;
+      }
+    }
+    
+    function goToItinerary() {
+      const currentBooking = JSON.parse(sessionStorage.getItem('currentBooking'));
+      if (currentBooking) {
+        const itineraryData = {
+          destination: currentBooking.destination,
+          startDate: currentBooking.start_date,
+          endDate: currentBooking.end_date,
+          duration: currentBooking.duration_days,
+          interests: ['adventure', 'nature', 'cultural'],
+          groupMembers: [{ name: 'You', initials: 'You' }],
+          matchScore: 100,
+          groupSize: currentBooking.travellers,
+          bookingCode: currentBooking.booking_code,
+          totalPaid: currentBooking.advance_paid
+        };
+        sessionStorage.setItem('itineraryData', JSON.stringify(itineraryData));
+      }
+      window.location.href = 'itinerary.html';
+    }
+    
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadBookingData();
+      setupPaymentMethods();
+      
+      document.getElementById('payBtn').addEventListener('click', processPayment);
+      
+      if (!sessionStorage.getItem('bookingData')) {
+        document.getElementById('payBtn').disabled = true;
+      }
+    });
+    
+    window.onclick = function(event) {
+      const modal = document.getElementById('successModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

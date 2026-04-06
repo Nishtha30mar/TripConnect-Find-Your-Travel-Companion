@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripConnect - User Profile | Travel India</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="user-profile.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Trip<span>Connect</span></h1>
+            </div>
+            <nav class="nav-links">
+                <a href="newindex.html" id="dashboard-btn"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" class="active" id="profile-btn"><i class="fas fa-user"></i> Profile</a>
+                <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.lcdOc6CAIpbvYx3XHfoJ0gHaF3?pid=Api&P=0&h=180" alt="Profile Avatar" class="avatar" id="profile-avatar">
+                            <div class="avatar-upload" id="avatar-upload-btn">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name-container">
+                                <h2 id="profile-name"></h2>
+                                <span class="user-id">ID: TC-2023-001247</span>
+                            </div>
+                            <p><i class="fas fa-envelope"></i> <span id="profile-email">rajesh.kumar@example.com</span></p>
+                            <p><i class="fas fa-phone"></i> <span id="profile-phone">+91 **********</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="profile-location">New Delhi, India</span></p>
+                            <p><i class="fas fa-birthday-cake"></i> <span id="profile-dob">15 March 1990</span> | <i class="fas fa-venus-mars"></i> <span id="profile-gender">Male</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab active" data-tab="personal">Personal Info</button>
+                        <button class="tab" data-tab="trips">My Trips</button>
+                        <button class="tab" data-tab="reviews">My Reviews</button>
+                    </div>
+                    
+                    <div id="personal" class="tab-content active">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="bio"><i class="fas fa-edit"></i> Bio</label>
+                                <textarea id="bio" class="form-control" rows="8" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+                            <div style="margin-top: 30px;">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="cancel-edit">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="trips" class="tab-content">
+                        <div id="trips-container"></div>
+                    </div>
+
+                    <div id="reviews" class="tab-content">
+                        <h3 style="margin-bottom: 20px; color: var(--dark-blue);">
+                            <i class="fas fa-star"></i> My Reviews
+                        </h3>
+                        <div id="reviews-container"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>TripConnect - Connecting Travelers Across India</p>
+            <div class="copyright">
+                <p>&copy; 2026 TripConnect. All rights reserved. | Made with <i class="fas fa-heart" style="color: #e53e3e;"></i> in India</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for Trip Cancellation -->
+    <div id="cancel-trip-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-exclamation-triangle" style="color: var(--saffron);"></i> Cancel Trip</h3>
+                <button class="modal-close" id="close-cancel-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="cancel-trip-message">Are you sure you want to cancel this trip?</p>
+                <p style="margin-top: 10px; font-size: 14px; color: var(--red);">
+                    <i class="fas fa-info-circle"></i> Cancellation fees may apply as per our policy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-trip-no">No, Keep Trip</button>
+                <button class="btn btn-danger" id="cancel-trip-yes">Yes, Cancel Trip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Add Review -->
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-star" style="color: var(--saffron);"></i> Write a Review</h3>
+                <button class="modal-close" id="close-review-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><i class="fas fa-suitcase"></i> Trip</label>
+                    <p id="review-trip-name" style="font-weight: 600; color: var(--dark-blue);"></p>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-star"></i> Rating</label>
+                    <div class="rating-input">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="review-rating" value="0">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-comment"></i> Your Review</label>
+                    <textarea id="review-text" class="form-control" rows="5" placeholder="Share your experience with this trip..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-review">Cancel</button>
+                <button class="btn btn-primary" id="submit-review">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <script src="user-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripConnect - Find Your Travel Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="travel-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fas fa-route logo-icon"></i>
+                <h1>TripConnect</h1>
+            </div>
+            <p class="tagline">
+                India's premier travel companion service. Connect with your perfect travel style as you explore the incredible diversity of India.
+            </p>
+
+            <div class="india-badge">
+                <i class="fas fa-map-pin"></i>
+                <span>Only Available in India</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Interests card -->
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-compass"></i> Select Your Travel Interests
+                </h2>
+                <p style="color: #7f8c8d; margin-bottom: 20px;">
+                    Choose exactly 5 interests for your Indian journey
+                </p>
+
+                <div class="interest-options">
+                    <div class="interest-option" data-interest="beach">
+                        <i class="fas fa-umbrella-beach interest-icon"></i>
+                        <span class="interest-name">Indian Beaches</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="mountain">
+                        <i class="fas fa-mountain interest-icon"></i>
+                        <span class="interest-name">Himalayan Treks</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="culture">
+                        <i class="fas fa-landmark interest-icon"></i>
+                        <span class="interest-name">Heritage Sites</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="food">
+                        <i class="fas fa-utensils interest-icon"></i>
+                        <span class="interest-name">Indian Cuisine</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="adventure">
+                        <i class="fas fa-hiking interest-icon"></i>
+                        <span class="interest-name">Adventure Sports</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="wildlife">
+                        <i class="fas fa-paw interest-icon"></i>
+                        <span class="interest-name">Wildlife Safaris</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="spiritual">
+                        <i class="fas fa-place-of-worship interest-icon"></i>
+                        <span class="interest-name">Spiritual Journeys</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="shopping">
+                        <i class="fas fa-shopping-bag interest-icon"></i>
+                        <span class="interest-name">Local Markets</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="wellness">
+                        <i class="fas fa-spa interest-icon"></i>
+                        <span class="interest-name">Ayurveda & Wellness</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="festivals">
+                        <i class="fas fa-mask interest-icon"></i>
+                        <span class="interest-name">Indian Festivals</span>
+                    </div>
+
+                    <div class="interest-option" data-interest="music">
+                        <i class="fas fa-music interest-icon"></i>
+                        <span class="interest-name">Songs</span>
+                    </div>
+                </div>
+
+                <div class="selection-status">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p style="color: #7f8c8d; font-size: 0.9rem; margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i> Selected: <span id="selected-count">0</span> of 5 interests (Select exactly 5)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Companion card -->
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-user-friends"></i> How Would You Like To Travel?
+                </h2>
+                <p style="color: #7f8c8d; margin-bottom: 20px;">
+                    Choose your preferred travel style within India
+                </p>
+
+                <div class="companion-options">
+                    <!-- Self Group -->
+                    <div class="companion-option disabled" data-companion="self-group">
+                        <div class="companion-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="companion-text">
+                            <h3>Self Group</h3>
+                            <p>
+                                Travel with your own selected group of friends or family. Perfect for those who want to explore India together with people they already know and trust.
+                            </p>
+                            <div class="requirements-message" style="display: none;">
+                                <p>
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span id="requirementsText">Select 5 interests to unlock</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="companion-status">
+                            <span class="lock-icon" style="display: block;"><i class="fas fa-lock"></i></span>
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+
+                    <!-- Find a Travel Buddy -->
+                    <div class="companion-option disabled" data-companion="buddy">
+                        <div class="companion-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="companion-text">
+                            <h3>Find a Travel Buddy</h3>
+                            <p>
+                                Connect with like-minded Indian travelers to share your journey. We'll match you with compatible travel partners based on your interests and preferences.
+                            </p>
+                        </div>
+                        <div class="companion-status">
+                            <span class="lock-icon"><i class="fas fa-lock"></i></span>
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instruction message -->
+                <div id="instruction-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Please select exactly 5 travel interests to unlock travel options</span>
+                </div>
+
+                <!-- Success message (hidden by default) -->
+                <div id="success-message" class="hidden">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Perfect! You can now choose your travel style</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>TripConnect &copy; 2026 | India's trusted travel companion service. Explore Incredible India with us.</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Safety First</a>
+                <a href="#"><i class="fas fa-rupee-sign"></i> Affordable Travel</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> 24/7 India Support</a>
+                <a href="#"><i class="fas fa-map-marked-alt"></i> Indian Destinations</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Requirements Modal Structure -->
+    <div id="requirementsModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-lock"></i> Self Group Requirements</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>To use the Self Group feature, you need to:</p>
+                <ul class="requirements-list">
+                    <li id="reqProfile" class="not-met">
+                        <i class="fas fa-times-circle"></i> Complete your profile
+                    </li>
+                    <li id="reqVerified" class="not-met">
+                        <i class="fas fa-times-circle"></i> Verify your account
+                    </li>
+                    <li id="reqPayment" class="not-met">
+                        <i class="fas fa-times-circle"></i> Add a payment method
+                    </li>
+                    <li id="reqTrips" class="not-met">
+                        <i class="fas fa-times-circle"></i> Complete at least 1 trip
+                    </li>
+                </ul>
+                <div class="modal-actions">
+                    <button class="btn btn-gradient" id="goToProfileBtn">
+                        <i class="fas fa-user-edit"></i> Complete Requirements
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="travel-style.js"></script>
+</body>
+
+</html>

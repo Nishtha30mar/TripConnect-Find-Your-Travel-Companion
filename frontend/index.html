@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripConnect - Where Travel Dreams Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles">
+        <div class="particle" style="--delay: 0s; --duration: 20s;"></div>
+        <div class="particle" style="--delay: 2s; --duration: 25s;"></div>
+        <div class="particle" style="--delay: 4s; --duration: 22s;"></div>
+        <div class="particle" style="--delay: 6s; --duration: 28s;"></div>
+        <div class="particle" style="--delay: 8s; --duration: 24s;"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-glow">
+                <div class="logo-text">TripConnect</div>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#destinations" class="nav-link"><i class="fas fa-map-marked-alt"></i> Destinations</a></li>
+            <li><a href="#reviews" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="#how-it-works" class="nav-link"><i class="fas fa-rocket"></i> How It Works</a></li>
+            <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <a href="loginhtml.html" class="btn btn-gradient">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="signuphtml.html" class="btn btn-gradient">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Dynamic Destinations -->
+    <section id="hero" class="hero">
+        <div class="hero-slideshow">
+            <div class="slide active" data-destination="goa">
+                <div class="slide-overlay"></div>
+                <div class="info-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+            <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="1.5" fill="white"/>
+          </svg>
+                </div>
+                <div class="destination-info"></div>
+            </div>
+            <div class="slide" data-destination="jaipur">
+                <div class="slide-overlay"></div>
+                <div class="info-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+            <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="1.5" fill="white"/>
+          </svg>
+                </div>
+                <div class="destination-info"></div>
+            </div>
+            <div class="slide" data-destination="manali">
+                <div class="slide-overlay"></div>
+                <div class="info-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+            <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="1.5" fill="white"/>
+          </svg>
+                </div>
+                <div class="destination-info"></div>
+            </div>
+            <div class="slide" data-destination="rishikesh">
+                <div class="slide-overlay"></div>
+                <div class="info-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+            <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="1.5" fill="white"/>
+          </svg>
+                </div>
+                <div class="destination-info"></div>
+            </div>
+            <div class="slide" data-destination="ayodhya">
+                <div class="slide-overlay"></div>
+                <div class="info-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+            <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="1.5" fill="white"/>
+          </svg>
+                </div>
+                <div class="destination-info"></div>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="tagline">Where Travel Dreams Become Reality</div>
+            <h1 class="hero-title">
+                <span class="word" data-text="Find">Find</span>
+                <span class="word" data-text="Your">Your</span>
+                <span class="word" data-text="Perfect">Perfect</span>
+                <br>
+                <span class="word" data-text="Travel">Travel</span>
+                <span class="word" data-text="Companions">Companions</span>
+            </h1>
+            <p class="hero-subtitle">
+                Connect with fellow adventurers who share your wanderlust. Create unforgettable memories across India's most magical destinations.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="loginhtml.html" class="btn btn-explore pulse-glow" id="planTripBtn">
+                    <i class="fas fa-map-marked-alt"></i> Explore Destinations
+                </a>
+            </div>
+        </div>
+
+        <!-- Slideshow Indicators -->
+        <div class="slideshow-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="destinations" class="features">
+        <div class="section-header">
+            <h2>Why Travelers <span class="gradient-text">Love</span> TripConnect</h2>
+            <p>Discover what makes us a unique platform for meaningful travel connections</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Safety First</h3>
+                <p>Verified profiles, real-time tracking, and 24/7 support for worry-free adventures.</p>
+            </div>
+
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Perfect Matches</h3>
+                <p>AI-powered matching based on travel style, budget, and personality compatibility.</p>
+            </div>
+
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h3>Smart Savings</h3>
+                <p>Split costs effortlessly and unlock exclusive group discounts across India.</p>
+            </div>
+
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>Local Secrets</h3>
+                <p>Access hidden gems and authentic experiences only locals and travelers know.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION - Added after destinations -->
+    <section id="reviews" class="reviews-section">
+        <div class="section-header">
+            <h2>Traveler <span class="gradient-text">Stories</span></h2>
+            <p>Real experiences from Manali, Jaipur & Goa adventures</p>
+        </div>
+
+        <div class="reviews-grid">
+            <!-- Manali Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Arjun Mehta</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> Manali, Himachal</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "Solo trip to Manali turned magical! Connected with 3 amazing travelers through TripConnect. We explored Solang Valley, went paragliding, and shared bonfire nights. The platform made it so easy to
+                    find like-minded adventure seekers!"
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> December 2025</span>
+                    <span><i class="fas fa-users"></i> Group of 4</span>
+                </div>
+            </div>
+
+            <!-- Manali Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Neha Sharma</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> Manali & Kasol</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "Found my travel tribe! We trekked through snow-covered trails and explored vibrant cafes in Kasol. The group chat feature helped coordinate everything. Made friends for life. Thank you TripConnect!"
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> January 2026</span>
+                    <span><i class="fas fa-users"></i> Group of 5</span>
+                </div>
+            </div>
+
+            <!-- Jaipur Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-palace"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Rahul Singhania</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "Jaipur's royal heritage came alive with my travel companions! Explored Amer Fort, Hawa Mahal, and indulged in authentic Rajasthani cuisine. The matching algorithm perfectly paired us based on cultural
+                    interests."
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> November 2025</span>
+                    <span><i class="fas fa-users"></i> Traveled with 4</span>
+                </div>
+            </div>
+
+            <!-- Jaipur Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-elephant"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Ishita Verma</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> Jaipur & Pushkar</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "From exploring the pink city to witnessing Pushkar Camel Fair, this trip was dreamy! TripConnect helped me connect with travel enthusiasts who shared my passion for photography and culture. Highly
+                    recommend!"
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> February 2026</span>
+                    <span><i class="fas fa-users"></i> Group of 6</span>
+                </div>
+            </div>
+
+            <!-- Goa Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Vikram & Friends</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> North Goa</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "Started as strangers, ended as best friends! Rented bikes, explored Baga and Anjuna beaches, partied at the most happening spots. TripConnect's safety features gave us peace of mind. Pure magic!"
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> December 2025</span>
+                    <span><i class="fas fa-users"></i> Group of 4</span>
+                </div>
+            </div>
+
+            <!-- Goa Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                    <div class="review-user">
+                        <h4>Anjali Nair</h4>
+                        <span class="review-destination"><i class="fas fa-map-marker-alt"></i> South Goa</span>
+                    </div>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="review-text">
+                    <i class="fas fa-quote-left"></i> "Found the perfect group for a relaxing Goa getaway! Stayed at a beautiful beachfront, did dolphin spotting, enjoyed serene sunsets at Palolem Beach. Made effortless connections with similar vibes."
+                </div>
+                <div class="review-footer">
+                    <span><i class="far fa-calendar-alt"></i> January 2026</span>
+                    <span><i class="fas fa-users"></i> Traveled with 3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-header">
+            <h2>Your Journey in <span class="gradient-text">3 Steps</span></h2>
+            <p>From dream to destination – we've made it beautifully simple</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>Create Your Adventure</h3>
+                <p>Tell us your dream destination, dates, and travel style. We'll handle the magic.</p>
+            </div>
+
+            <div class="step-card active">
+                <div class="step-number">02</div>
+                <h3>Find Your Tribe</h3>
+                <p>Get matched with like-minded travelers who share your vibe and itinerary.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>Travel Together</h3>
+                <p>Create memories, share stories, and build friendships that last beyond the trip.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-hero">
+        <div class="cta-content">
+            <h2>Ready to Find Your Travel Family?</h2>
+            <p>Join thousands of adventurers who turned strangers into lifelong friends</p>
+            <div class="cta-buttons">
+                <a href="loginhtml.html" class="btn btn-explore" id="beginJourneyBtn">
+                    <i class="fas fa-rocket"></i> Start Planning Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-glow">
+                    <i class="fas fa-users logo-icon"></i>
+                    <div class="logo-text">TripConnect</div>
+                </div>
+                <p>Where travel dreams connect with perfect companions</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Destinations</h4>
+                    <a href="loginhtml.html">Goa</a>
+                    <a href="loginhtml.html">Manali</a>
+                    <a href="loginhtml.html">Rishikesh</a>
+                    <a href="loginhtml.html">Jaipur</a>
+                    <a href="loginhtml.html">Ayodhya</a>
+
+                </div>
+                <div class="link-column">
+                    <h4>Company</h4>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="loginhtml.html">Safety</a>
+                    <a href="#about">About Us</a>
+                    <a href="loginhtml.html">Careers</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="loginhtml.html">FAQ</a>
+                    <a href="#contact">Contact</a>
+                    <a href="loginhtml.html">Privacy</a>
+                    <a href="loginhtml.html">Terms</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 TripConnect. Made with ❤️ in India. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

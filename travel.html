@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripConnect - Find Your Travel Buddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.4rem;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            text-align: right;
+            max-width: 400px;
+        }
+        
+        /* Main content layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: left;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .tagline {
+                text-align: left;
+            }
+        }
+        
+        /* Left panel - User Profile & Matching */
+        .matching-section {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .matching-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Right panel - Matches & Groups */
+        .matches-section {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .matches-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Section titles */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f8ff;
+        }
+        
+        .section-title i {
+            color: #3498db;
+        }
+        
+        /* User Profile Card */
+        .user-profile {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f8fafc;
+            border-radius: 15px;
+            border: 2px solid #e8f0fe;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .profile-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .profile-location {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .profile-interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .interest-tag {
+            background-color: #e8f2ff;
+            color: #3498db;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Matching Criteria */
+        .matching-criteria {
+            margin-top: 30px;
+        }
+        
+        .criteria-group {
+            margin-bottom: 25px;
+        }
+        
+        .criteria-group h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .criteria-group h4 i {
+            color: #3498db;
+        }
+        
+        .criteria-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .criteria-option {
+            padding: 8px 15px;
+            border: 2px solid #e8f0fe;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+            font-size: 0.9rem;
+        }
+        
+        .criteria-option:hover {
+            border-color: #3498db;
+            background-color: #f0f7ff;
+        }
+        
+        .criteria-option.selected {
+            border-color: #3498db;
+            background-color: #e8f2ff;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        /* Start Matching Button */
+        .cta-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            margin-top: 30px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Matches Container */
+        .matches-container {
+            display: none;
+        }
+        
+        /* Match Cards */
+        .match-card {
+            background-color: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #e8f0fe;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Group Success Card */
+        .group-success-card {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: none;
+            text-align: center;
+            position: relative;
+        }
+        
+        .group-success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .group-success-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .group-success-card p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .group-members-display {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .group-member-small {
+            text-align: center;
+        }
+        
+        .member-avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2ecc71;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 auto 8px;
+        }
+        
+        .member-name-small {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .group-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        
+        .group-stat-item {
+            text-align: center;
+        }
+        
+        .group-stat-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .group-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Leave Group Button */
+        .leave-group-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .leave-group-btn:hover {
+            background: rgba(231, 76, 60, 0.8);
+            border-color: rgba(231, 76, 60, 0.8);
+        }
+        
+        /* Group Invitation Modal */
+        .group-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-header h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .modal-header p {
+            color: #7f8c8d;
+        }
+        
+        .group-members {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .group-member {
+            text-align: center;
+        }
+        
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 auto 10px;
+        }
+        
+        .member-name {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+        
+        .match-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 15px;
+            border: 2px solid #e8f0fe;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.1rem;
+        }
+        
+        .modal-accept {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .modal-reject {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid #e8f0fe;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .group-members-display {
+                gap: 10px;
+            }
+            
+            .leave-group-btn {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-top: 20px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fas fa-route logo-icon"></i>
+                <h1>TripConnect</h1>
+            </div>
+            <p class="tagline">Find Your Perfect Travel Companion</p>
+        </header>
+        
+
+
+                
+                                
+                <button class="cta-button" id="findBuddiesBtn">
+                    <i class="fas fa-search"></i> Find Your Travel Group
+                </button>
+            </div>
+            
+            <!-- Right Panel: Matches & Groups -->
+            <div class="matches-section">
+                <h2 class="section-title"><i class="fas fa-handshake"></i> Your Travel Group</h2>
+                <p style="color: #7f8c8d; margin-bottom: 25px;">Our intelligent algorithm finds the perfect travel group for you based on your preferences.</p>
+                
+                <div class="matches-container" id="matchesContainer">
+                    <!-- Group or matches will be populated here -->
+                </div>
+                
+                <div id="noMatchesMessage" style="text-align: center; padding: 50px; color: #7f8c8d;">
+                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: #3498db;"></i>
+                    <h3>No group found yet</h3>
+                    <p>Click "Find Travel Buddies" to find your perfect travel group!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group Invitation Modal -->
+        <div class="group-modal" id="groupModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-users"></i> Group Formation Invitation</h2>
+                    <p>You've been matched with compatible travelers!</p>
+                </div>
+                
+                <div class="match-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalMatchScore">94%</div>
+                        <div class="stat-label">Match Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalGroupSize">5</div>
+                        <div class="stat-label">Group Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalCommonInterests">4</div>
+                        <div class="stat-label">Common Interests</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="modalTripDates">7 Days</div>
+                        <div class="stat-label">Trip Duration</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <h4><i class="fas fa-map-marker-alt"></i> Destination: <span id="modalDestination">Goa, India</span></h4>
+                    <p style="color: #7f8c8d; margin-top: 5px;"><i class="fas fa-calendar"></i> Dates: <span id="modalDates">Dec 15-22, 2023</span></p>
+                </div>
+                
+                <div class="group-members" id="modalMembers">
+                    <!-- Group members will be populated here -->
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-reject" id="rejectGroupBtn">
+                        <i class="fas fa-times"></i> Reject Group
+                    </button>
+                    <button class="modal-btn modal-accept" id="acceptGroupBtn">
+                        <i class="fas fa-check"></i> Accept & Join Group
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>TripConnect &copy; 2023 | Intelligent Travel Buddy Matching</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Safety & Verification</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> 24/7 Support</a>
+                <a href="#"><i class="fas fa-question-circle"></i> How It Works</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Sample data for matches (would come from backend in real app)
+        const potentialMatches = [
+            {
+                id: 1,
+                name: "Priya Sharma",
+                initials: "PS",
+                age: 28,
+                location: "Delhi",
+                matchScore: 94,
+                destination: "Goa",
+                dates: "Dec 15-22, 2023",
+                budget: "Mid-Range",
+                groupSize: "4-6 People",
+                interests: ["Indian Cuisine", "Adventure Sports", "Beaches", "Photography"],
+                bio: "Adventure enthusiast looking for beach and food experiences"
+            },
+            {
+                id: 2,
+                name: "Arun Kumar",
+                initials: "AK",
+                age: 32,
+                location: "Bangalore",
+                matchScore: 88,
+                destination: "Goa",
+                dates: "Dec 16-23, 2023",
+                budget: "Mid-Range",
+                groupSize: "4-6 People",
+                interests: ["Adventure Sports", "Photography", "Local Markets", "Nightlife"],
+                bio: "Professional photographer seeking adventure and cultural experiences"
+            },
+            {
+                id: 3,
+                name: "Neha Patel",
+                initials: "NP",
+                age: 26,
+                location: "Ahmedabad",
+                matchScore: 85,
+                destination: "Goa",
+                dates: "Dec 15-20, 2023",
+                budget: "Mid-Range",
+                groupSize: "4-6 People",
+                interests: ["Indian Cuisine", "Beaches", "Wellness", "Heritage Sites"],
+                bio: "Food blogger excited to explore Goan cuisine and beaches"
+            },
+            {
+                id: 4,
+                name: "Vikram Singh",
+                initials: "VS",
+                age: 30,
+                location: "Pune",
+                matchScore: 82,
+                destination: "Goa",
+                dates: "Dec 18-25, 2023",
+                budget: "Mid-Range",
+                groupSize: "4-6 People",
+                interests: ["Adventure Sports", "Photography", "Indian Cuisine", "Nightlife"],
+                bio: "Software engineer looking for adventure and relaxation mix"
+            }
+        ];
+
+        // Current user's data
+        const currentUser = {
+            name: "Rahul Jain",
+            initials: "RJ",
+            interests: ["Adventure Sports", "Indian Cuisine", "Heritage Sites", "Photography"],
+            destination: "Goa",
+            dates: "Dec 15-22, 2023",
+            budget: "Mid-Range",
+            groupSize: "4-6 People"
+        };
+
+        // DOM Elements
+        const criteriaOptions = document.querySelectorAll('.criteria-option');
+        const findBuddiesBtn = document.getElementById('findBuddiesBtn');
+        const matchesContainer = document.getElementById('matchesContainer');
+        const noMatchesMessage = document.getElementById('noMatchesMessage');
+        const groupModal = document.getElementById('groupModal');
+        const modalMatchScore = document.getElementById('modalMatchScore');
+        const modalGroupSize = document.getElementById('modalGroupSize');
+        const modalCommonInterests = document.getElementById('modalCommonInterests');
+        const modalDestination = document.getElementById('modalDestination');
+        const modalDates = document.getElementById('modalDates');
+        const modalMembers = document.getElementById('modalMembers');
+        const rejectGroupBtn = document.getElementById('rejectGroupBtn');
+        const acceptGroupBtn = document.getElementById('acceptGroupBtn');
+
+        // Track group formation status
+        let groupFormed = false;
+        let groupRejected = false;
+
+        // User's selected criteria
+        let userCriteria = {
+            destination: 'goa',
+            dates: 'dec2023',
+            groupsize: '4-6',
+            budget: 'midrange'
+        };
+
+        // Initialize
+        setupCriteriaSelection();
+
+        // Setup criteria selection
+        function setupCriteriaSelection() {
+            criteriaOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const criteria = this.getAttribute('data-criteria');
+                    const value = this.getAttribute('data-value');
+                    
+                    // Remove selected class from all options in same group
+                    document.querySelectorAll(`[data-criteria="${criteria}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update user criteria
+                    userCriteria[criteria] = value;
+                });
+            });
+        }
+
+        // Find Travel Buddies
+        findBuddiesBtn.addEventListener('click', function() {
+            // Reset group formed status when searching again
+            groupFormed = false;
+            groupRejected = false;
+            
+            // Show loading
+            const originalText = findBuddiesBtn.innerHTML;
+            findBuddiesBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Finding Group...';
+            findBuddiesBtn.disabled = true;
+            
+            // Simulate algorithm matching delay
+            setTimeout(() => {
+                findGroup();
+                
+                // Reset button
+                findBuddiesBtn.innerHTML = originalText;
+                findBuddiesBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Find group based on criteria
+        function findGroup() {
+            // Clear previous matches
+            matchesContainer.innerHTML = '';
+            
+            // If group was rejected, show rejection message
+            if (groupRejected) {
+                showRejectionMessage();
+                return;
+            }
+            
+            // If group is already formed, show group
+            if (groupFormed) {
+                showGroupSuccess();
+                return;
+            }
+            
+            // Check if we have enough matches
+            const filteredMatches = potentialMatches.filter(match => {
+                return match.destination.toLowerCase() === 'goa' && 
+                       match.budget === 'Mid-Range' &&
+                       match.groupSize === '4-6 People';
+            });
+            
+            if (filteredMatches.length >= 3) {
+                // Show group invitation
+                showGroupInvitation(filteredMatches.slice(0, 4));
+            } else {
+                // Not enough matches for a group
+                noMatchesMessage.style.display = 'block';
+                matchesContainer.style.display = 'none';
+                matchesContainer.innerHTML = '';
+            }
+        }
+
+        // Show group invitation
+        function showGroupInvitation(members) {
+            // Calculate group statistics
+            const totalMembers = members.length + 1; // +1 for current user
+            const commonInterests = calculateCommonInterests(members);
+            const avgMatchScore = Math.round(members.reduce((sum, m) => sum + m.matchScore, 0) / members.length);
+            
+            // Update modal content
+            modalMatchScore.textContent = `${avgMatchScore}%`;
+            modalGroupSize.textContent = totalMembers;
+            modalCommonInterests.textContent = commonInterests.length;
+            modalDestination.textContent = 'Goa, India';
+            modalDates.textContent = 'Dec 15-22, 2023';
+            
+            // Show group members
+            modalMembers.innerHTML = '';
+            
+            // Add current user
+            addMemberToModal(currentUser.initials, currentUser.name);
+            
+            // Add other members
+            members.forEach(member => {
+                addMemberToModal(member.initials, member.name);
+            });
+            
+            // Show modal
+            groupModal.style.display = 'flex';
+        }
+
+        // Add member to modal
+        function addMemberToModal(initials, name) {
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'group-member';
+            memberDiv.innerHTML = `
+                <div class="member-avatar">${initials}</div>
+                <div class="member-name">${name}</div>
+            `;
+            modalMembers.appendChild(memberDiv);
+        }
+
+        // Calculate common interests among group
+        function calculateCommonInterests(members) {
+            const allInterests = [...currentUser.interests];
+            members.forEach(member => {
+                allInterests.push(...member.interests);
+            });
+            
+            // Find interests that appear multiple times
+            const interestCounts = {};
+            allInterests.forEach(interest => {
+                interestCounts[interest] = (interestCounts[interest] || 0) + 1;
+            });
+            
+            return Object.keys(interestCounts).filter(interest => interestCounts[interest] >= 3);
+        }
+
+        // Handle group acceptance
+        acceptGroupBtn.addEventListener('click', function() {
+            acceptGroupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Joining Group...';
+            acceptGroupBtn.disabled = true;
+            
+            setTimeout(() => {
+                // In real app, this would send to backend
+                alert('Successfully joined the group! Your trip details will be shared soon.');
+                
+                // Close modal
+                groupModal.style.display = 'none';
+                
+                // Reset button
+                acceptGroupBtn.innerHTML = '<i class="fas fa-check"></i> Accept & Join Group';
+                acceptGroupBtn.disabled = false;
+                
+                // Set group formed flag
+                groupFormed = true;
+                
+                // Show group success
+                showGroupSuccess();
+            }, 1500);
+        });
+
+        // Handle group rejection
+        rejectGroupBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to reject this group?')) {
+                // Set group rejected flag
+                groupRejected = true;
+                
+                // Close modal
+                groupModal.style.display = 'none';
+                
+                // Show rejection message
+                showRejectionMessage();
+            }
+        });
+
+        // Show group success
+        function showGroupSuccess() {
+            // Clear matches container
+            matchesContainer.innerHTML = '';
+            
+            // Hide no matches message
+            noMatchesMessage.style.display = 'none';
+            
+            // Create group success card
+            const successDiv = document.createElement('div');
+            successDiv.className = 'group-success-card';
+            
+            successDiv.innerHTML = `
+                <button class="leave-group-btn" id="leaveGroupBtn">
+                    <i class="fas fa-sign-out-alt"></i> Leave Group
+                </button>
+                
+                <i class="fas fa-check-circle group-success-icon"></i>
+                <h3>Group Successfully Formed!</h3>
+                <p>Your travel group for Goa is ready. You'll receive trip details shortly.</p>
+                
+                <div class="group-stats">
+                    <div class="group-stat-item">
+                        <div class="group-stat-value">5</div>
+                        <div class="group-stat-label">Members</div>
+                    </div>
+                    <div class="group-stat-item">
+                        <div class="group-stat-value">94%</div>
+                        <div class="group-stat-label">Match Score</div>
+                    </div>
+                    <div class="group-stat-item">
+                        <div class="group-stat-value">7 Days</div>
+                        <div class="group-stat-label">Duration</div>
+                    </div>
+                    <div class="group-stat-item">
+                        <div class="group-stat-value">Dec 15-22</div>
+                        <div class="group-stat-label">Dates</div>
+                    </div>
+                </div>
+                
+                <div class="group-members-display">
+                    <div class="group-member-small">
+                        <div class="member-avatar-small">RJ</div>
+                        <div class="member-name-small">Rahul</div>
+                    </div>
+                    <div class="group-member-small">
+                        <div class="member-avatar-small">PS</div>
+                        <div class="member-name-small">Priya</div>
+                    </div>
+                    <div class="group-member-small">
+                        <div class="member-avatar-small">AK</div>
+                        <div class="member-name-small">Arun</div>
+                    </div>
+                    <div class="group-member-small">
+                        <div class="member-avatar-small">NP</div>
+                        <div class="member-name-small">Neha</div>
+                    </div>
+                    <div class="group-member-small">
+                        <div class="member-avatar-small">VS</div>
+                        <div class="member-name-small">Vikram</div>
+                    </div>
+                </div>
+                
+                           `;
+            
+            matchesContainer.appendChild(successDiv);
+            matchesContainer.style.display = 'block';
+            
+            // Add event listener to leave group button
+            document.getElementById('leaveGroupBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to leave this group? You will need to search for a new group.')) {
+                    alert('You have left the group. You can now search for a new travel group.');
+                    groupFormed = false;
+                    findBuddiesBtn.click(); // Trigger new search
+                }
+            });
+        }
+
+        // Show rejection message
+        function showRejectionMessage() {
+            // Clear matches container
+            matchesContainer.innerHTML = '';
+            
+            // Hide no matches message
+            noMatchesMessage.style.display = 'none';
+            
+            // Create rejection message
+            const rejectionDiv = document.createElement('div');
+            rejectionDiv.className = 'match-card';
+            rejectionDiv.style.textAlign = 'center';
+            rejectionDiv.style.padding = '40px';
+            
+            rejectionDiv.innerHTML = `
+                <i class="fas fa-times-circle" style="font-size: 4rem; color: #e74c3c; margin-bottom: 20px;"></i>
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">Group Rejected</h3>
+                <p style="color: #7f8c8d; margin-bottom: 25px;">You have rejected the suggested travel group.</p>
+                <p style="color: #7f8c8d; margin-bottom: 30px;">Click "Find Travel Buddies" again to search for a new group.</p>
+                <button class="cta-button" id="searchAgainBtn" style="max-width: 300px; margin: 0 auto;">
+                    <i class="fas fa-search"></i> Search Again
+                </button>
+            `;
+            
+            matchesContainer.appendChild(rejectionDiv);
+            matchesContainer.style.display = 'block';
+            
+            // Add event listener to search again button
+            document.getElementById('searchAgainBtn').addEventListener('click', function() {
+                groupRejected = false;
+                findBuddiesBtn.click();
+            });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === groupModal) {
+                groupModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

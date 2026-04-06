@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Group - Member Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Keep your existing styles exactly as they are */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 15px;
+        }
+
+        .trip-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffd8a8;
+            font-size: 1.1rem;
+        }
+
+        .info-item i {
+            color: #4dabf7;
+        }
+
+        .itinerary-btn {
+            background: linear-gradient(to right, #FFA500, #FF8C00);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 15px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .itinerary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .itinerary-btn:active {
+            transform: translateY(0);
+        }
+
+        .itinerary-btn i {
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .input-section {
+            flex: 1;
+            min-width: 350px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #4dabf7;
+        }
+
+        .destination-header {
+            text-align: center;
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .member-entry-container {
+            margin-bottom: 25px;
+        }
+
+        .member-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .member-number {
+            font-weight: 600;
+            color: #4dabf7;
+        }
+
+        .member-form {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #4dabf7;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            cursor: pointer;
+        }
+
+        select option {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4dabf7;
+            box-shadow: 0 0 10px rgba(77, 171, 247, 0.5);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #4dabf7, #3b82f6);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .members-list {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            display: none;
+        }
+
+        .members-list-title {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .member-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .member-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .member-age {
+            background-color: #4dabf7;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .member-relationship {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .badge-error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background-color: rgba(255, 107, 107, 0.2);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-message {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .connection-online {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .connection-offline {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #ccc;
+            font-size: 0.9rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .destination-header {
+                font-size: 1.8rem;
+                flex-direction: column;
+            }
+            
+            .trip-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .itinerary-btn {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        .trip-type-badge {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+        
+        .sync-btn {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+        
+        .sync-btn:hover {
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-users"></i> Complete Your Travel Group</h1>
+            <p class="subtitle">Please enter the names and ages of all group members to finalize your travel plans</p>
+            
+            <div class="trip-info" id="tripInfo">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Destination: <strong id="destinationName">Loading...</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Group Size: <strong id="groupSize">0</strong> travelers</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Departure: <strong id="departureDate">Loading...</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Return: <strong id="returnDate">Loading...</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-rupee-sign"></i>
+                    <span>Budget: <strong id="budgetRange">Loading...</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Duration: <strong id="durationDays">Calculating...</strong></span>
+                </div>
+            </div>
+            <div id="globalConnectionStatus" style="margin-top: 10px;"></div>
+        </header>
+        
+        <div class="destination-header" id="destinationHeader">
+            <i class="fas fa-map-marker-alt"></i> <span id="destinationHeaderText">Loading...</span>
+            <span id="tripTypeBadge" class="trip-type-badge" style="display: none;">
+                <i class="fas fa-pencil-alt"></i> Custom Trip
+            </span>
+        </div>
+        
+        <div class="main-content">
+            <section class="input-section">
+                <h2 class="section-title"><i class="fas fa-user-edit"></i> Enter Member Details</h2>
+                
+                <div id="connectionStatusMessage"></div>
+                
+                <div class="member-entry-container">
+                    <div class="member-counter">
+                        <span>You need to enter details for <span class="member-number" id="memberCount">0</span> travelers</span>
+                        <span id="savedStatus" style="display: none;" class="badge badge-success">
+                            <i class="fas fa-check"></i> Saved to Database
+                        </span>
+                        <span id="localSavedStatus" style="display: none;" class="badge badge-warning">
+                            <i class="fas fa-save"></i> Saved Locally
+                        </span>
+                    </div>
+                    
+                    <form id="memberForm"></form>
+                    
+                    <button class="submit-btn" id="submitBtn">
+                        <i class="fas fa-check-circle"></i> Complete Registration
+                    </button>
+                    
+                    <div id="syncPendingContainer" style="display: none; margin-top: 10px; text-align: center;">
+                        <button class="sync-btn" id="syncPendingBtn">
+                            <i class="fas fa-sync-alt"></i> Sync Pending Data to Database
+                        </button>
+                    </div>
+                    
+                    <div id="actionStatus"></div>
+                    
+                    <div class="members-list" id="membersList">
+                        <h3 class="members-list-title"><i class="fas fa-user-check"></i> Registered Members</h3>
+                        <div id="membersListContent"></div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="itinerary-btn" id="viewItineraryBtnList" style="margin-left: 0;">
+                                <i class="fas fa-map-signals"></i> Pay here!!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Travel Group Planner &copy; 2026 | Your adventure awaits in <span id="footerDestination">...</span></p>
+            <p><i class="fas fa-heart" style="color:#ff6b6b;"></i> Make memories that will last a lifetime</p>
+        </footer>
+    </div>
+    
+    <script>
+        // =============================================
+        // COMPLETE CORRECTED CODE WITH duration_days AND interests
+        // =============================================
+        
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const MAX_INT = 2147483647;
+        
+        const destinationData = {
+            'goa': {
+                name: 'Goa',
+                fullName: 'Goa',
+                background: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
+                color: '#1E88E5',
+                defaultInterests: ['beach', 'nightlife', 'water_sports', 'parties']
+            },
+            'jaipur': {
+                name: 'Jaipur',
+                fullName: 'Jaipur, Rajasthan',
+                background: 'https://images.unsplash.com/photo-1585506936724-fa0c19c7b3c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                color: '#FF6B35',
+                defaultInterests: ['heritage', 'culture', 'food', 'forts']
+            },
+            'rishikesh': {
+                name: 'Rishikesh',
+                fullName: 'Rishikesh, Uttarakhand',
+                background: 'https://images.unsplash.com/photo-1597074861081-8b3e5e7b3b1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                color: '#4CAF50',
+                defaultInterests: ['adventure', 'rafting', 'yoga', 'camping']
+            },
+            'manali': {
+                name: 'Manali',
+                fullName: 'Manali, Himachal Pradesh',
+                background: 'https://images.unsplash.com/photo-1593693399744-b3d7a2c84c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                color: '#2196F3',
+                defaultInterests: ['snow', 'trekking', 'adventure', 'mountains']
+            },
+            'ayodhya': {
+                name: 'Ayodhya',
+                fullName: 'Ayodhya, Uttar Pradesh',
+                background: 'https://images.unsplash.com/photo-1585506936724-fa0c19c7b3c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                color: '#FF9800',
+                defaultInterests: ['spiritual', 'temple', 'culture', 'heritage']
+            }
+        };
+
+        let isBackendConnected = false;
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('=== GROUP DETAILS PAGE LOADED ===');
+            
+            try {
+                await testBackendConnection();
+                const savedData = loadFromSessionStorage();
+                console.log('Loaded travel data:', savedData);
+                
+                updatePageWithData(savedData);
+                generateMemberForms(savedData.travellers);
+                
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    await submitMemberDetails(savedData);
+                });
+                
+                const syncBtn = document.getElementById('syncPendingBtn');
+                syncBtn.addEventListener('click', async function() {
+                    await syncPendingMembers();
+                });
+                
+                updateConnectionStatusUI();
+                setupViewItineraryButtons();
+                checkPendingData();
+                
+                // Calculate and display duration
+                updateDurationDisplay(savedData);
+                
+            } catch (error) {
+                console.error('Error during initialization:', error);
+                showErrorMessage('Failed to initialize page. Please refresh.', 'error');
+            }
+        });
+
+        function updateDurationDisplay(tripData) {
+            if (tripData.startDate && tripData.endDate) {
+                const start = new Date(tripData.startDate);
+                const end = new Date(tripData.endDate);
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                document.getElementById('durationDays').textContent = diffDays + ' days';
+            }
+        }
+
+        function setupViewItineraryButtons() {
+            const viewButtons = [
+                document.getElementById('viewItineraryBtn'),
+                document.getElementById('viewItineraryBtnMobile'),
+                document.getElementById('viewItineraryBtnList'),
+                document.getElementById('viewItineraryBtnFooter')
+            ];
+            
+            viewButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', redirectToRishikesh);
+                }
+            });
+        }
+
+        function redirectToRishikesh() {
+            console.log('Redirecting to Rishikesh itinerary page...');
+            const tripData = window.currentTripData || {};
+            sessionStorage.setItem('fromMemberDetails', 'true');
+            
+            const members = [];
+            const count = tripData.travellers || parseInt(document.getElementById('memberCount')?.textContent) || 1;
+            
+            for (let i = 1; i <= count; i++) {
+                const nameInput = document.getElementById(`memberName${i}`);
+                const ageInput = document.getElementById(`memberAge${i}`);
+                const relationshipSelect = document.getElementById(`memberRelationship${i}`);
+                
+                if (nameInput && nameInput.value.trim()) {
+                    members.push({
+                        name: nameInput.value.trim(),
+                        age: ageInput ? ageInput.value : '',
+                        relationship: relationshipSelect ? relationshipSelect.value : (i === 1 ? 'Self' : 'Other')
+                    });
+                }
+            }
+            
+            if (members.length > 0) {
+                sessionStorage.setItem('itineraryMembers', JSON.stringify(members));
+            }
+            
+            window.location.href = 'self_itinerary.html';
+        }
+
+        async function testBackendConnection() {
+            try {
+                console.log('Testing backend connection...');
+                const response = await fetch(`${API_BASE_URL}/members/test`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    signal: AbortSignal.timeout(3000)
+                });
+                
+                if (response.ok) {
+                    console.log('✅ Backend connection successful!');
+                    isBackendConnected = true;
+                    return true;
+                } else {
+                    console.warn('⚠️ Backend returned error status:', response.status);
+                    isBackendConnected = false;
+                    return false;
+                }
+            } catch (error) {
+                console.warn('❌ Backend connection failed:', error.message);
+                isBackendConnected = false;
+                showConnectionWarning();
+                return false;
+            }
+        }
+
+        function showConnectionWarning() {
+            const connectionEl = document.getElementById('connectionStatusMessage');
+            if (connectionEl) {
+                connectionEl.innerHTML = `
+                    <div class="warning-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>⚠️ Database Connection Failed</strong>
+                            <p style="margin-top: 5px; font-size: 0.9rem;">
+                                Cannot connect to backend server. Your data will be saved locally.
+                                <br>
+                                <small>Make sure your backend server is running at <strong>http://localhost:5000</strong></small>
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const globalStatus = document.getElementById('globalConnectionStatus');
+            if (globalStatus) {
+                globalStatus.innerHTML = `
+                    <span class="connection-status connection-offline">
+                        <i class="fas fa-plug"></i> Backend: Offline
+                    </span>
+                `;
+            }
+        }
+
+        function updateConnectionStatusUI() {
+            const globalStatus = document.getElementById('globalConnectionStatus');
+            if (globalStatus && isBackendConnected) {
+                globalStatus.innerHTML = `
+                    <span class="connection-status connection-online">
+                        <i class="fas fa-plug"></i> Backend: Connected
+                    </span>
+                `;
+            }
+        }
+
+        function ensureIntRange(value) {
+            let num = parseInt(value) || 0;
+            if (num > MAX_INT) {
+                console.warn(`Value ${num} exceeds INT maximum, generating smaller ID`);
+                num = Math.floor(Math.random() * 2000000000) + 1;
+            }
+            return Math.min(Math.max(1, num), MAX_INT);
+        }
+
+        function loadFromSessionStorage() {
+            const emptyData = {
+                destination: '',
+                startDate: '',
+                endDate: '',
+                budgetMin: '',
+                budgetMax: '',
+                travellers: 1,
+                source: 'empty',
+                isCustom: false,
+                preference_id: null
+            };
+            
+            try {
+                const savedParams = sessionStorage.getItem('lastSearchParams');
+                console.log('Raw sessionStorage lastSearchParams:', savedParams);
+                
+                if (savedParams) {
+                    const params = JSON.parse(savedParams);
+                    console.log('✅ FOUND REAL USER DATA IN SESSION STORAGE:', params);
+                    
+                    const tripType = sessionStorage.getItem('tripType');
+                    const isCustom = tripType === 'custom';
+                    
+                    return {
+                        destination: params.destination || '',
+                        startDate: params.startDate || '',
+                        endDate: params.endDate || '',
+                        budgetMin: params.budgetMin || '',
+                        budgetMax: params.budgetMax || '',
+                        travellers: parseInt(params.travellers) || 1,
+                        source: 'sessionStorage',
+                        isCustom: isCustom,
+                        preference_id: null
+                    };
+                }
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('destination')) {
+                    console.log('✅ FOUND URL PARAMETERS:', Object.fromEntries(urlParams));
+                    
+                    return {
+                        destination: urlParams.get('destination') || '',
+                        startDate: urlParams.get('startDate') || '',
+                        endDate: urlParams.get('endDate') || '',
+                        budgetMin: urlParams.get('budgetMin') || '',
+                        budgetMax: urlParams.get('budgetMax') || '',
+                        travellers: parseInt(urlParams.get('travellers')) || 1,
+                        source: 'urlParams',
+                        isCustom: urlParams.get('tripType') === 'custom',
+                        preference_id: null
+                    };
+                }
+                
+                const pendingPrefs = localStorage.getItem('pending_travel_prefs');
+                if (pendingPrefs) {
+                    const prefs = JSON.parse(pendingPrefs);
+                    console.log('✅ FOUND PENDING PREFS:', prefs);
+                    
+                    let preference_id = prefs.preference_id || null;
+                    if (preference_id) {
+                        preference_id = ensureIntRange(preference_id);
+                    }
+                    
+                    return {
+                        destination: prefs.destination || '',
+                        startDate: prefs.start_date || '',
+                        endDate: prefs.end_date || '',
+                        budgetMin: prefs.budget_min || '',
+                        budgetMax: prefs.budget_max || '',
+                        travellers: prefs.travelers_count || 1,
+                        source: 'localStorage',
+                        isCustom: true,
+                        preference_id: preference_id
+                    };
+                }
+                
+            } catch (e) {
+                console.error('Error loading from storage:', e);
+            }
+            
+            console.warn('⚠️ NO SAVED DATA FOUND');
+            setTimeout(() => {
+                showErrorMessage('No trip data found. Please start by selecting a destination.', 'error');
+            }, 500);
+            
+            return emptyData;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr || dateStr === '') return 'Not selected';
+            
+            try {
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) return dateStr;
+                
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        function updatePageWithData(data) {
+            console.log('Updating page with data:', data);
+            
+            let destinationName = data.destination || 'Not selected';
+            let destinationFullName = data.destination || 'Not selected';
+            let destinationKey = data.destination ? data.destination.toLowerCase() : '';
+            let destination = null;
+            
+            if (destinationKey) {
+                for (const [key, value] of Object.entries(destinationData)) {
+                    if (destinationKey.includes(key) || key.includes(destinationKey)) {
+                        destination = value;
+                        destinationKey = key;
+                        destinationFullName = value.fullName || value.name;
+                        break;
+                    }
+                }
+            }
+            
+            document.getElementById('destinationName').textContent = destinationFullName;
+            document.getElementById('destinationHeaderText').textContent = destinationFullName;
+            document.getElementById('footerDestination').textContent = destinationFullName.split(',')[0] || destinationFullName;
+            
+            if (data.isCustom) {
+                const badge = document.getElementById('tripTypeBadge');
+                badge.style.display = 'inline-flex';
+            }
+            
+            document.getElementById('departureDate').textContent = formatDate(data.startDate);
+            document.getElementById('returnDate').textContent = formatDate(data.endDate);
+            
+            const travellers = data.travellers || 1;
+            document.getElementById('groupSize').textContent = travellers;
+            document.getElementById('memberCount').textContent = travellers;
+            
+            if (data.budgetMin && data.budgetMax) {
+                const min = parseInt(data.budgetMin) || 0;
+                const max = parseInt(data.budgetMax) || 0;
+                document.getElementById('budgetRange').innerHTML = `₹${min.toLocaleString()} - ₹${max.toLocaleString()}`;
+            } else {
+                document.getElementById('budgetRange').innerHTML = 'Not specified';
+            }
+            
+            if (destination && destination.background) {
+                document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('${destination.background}')`;
+            }
+            
+            window.currentTripData = data;
+        }
+
+        function generateMemberForms(count) {
+            const form = document.getElementById('memberForm');
+            form.innerHTML = '';
+            
+            count = parseInt(count) || 1;
+            if (count < 1) count = 1;
+            if (count > 10) count = 10;
+            
+            for (let i = 1; i <= count; i++) {
+                const memberForm = document.createElement('div');
+                memberForm.className = 'member-form';
+                memberForm.style.animationDelay = `${i * 0.1}s`;
+                
+                const relationshipOptions = `
+                    <option value="Self" ${i === 1 ? 'selected' : ''} ${i === 1 ? 'disabled' : ''}>Self</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Child">Child</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Sibling">Sibling</option>
+                    <option value="Friend">Friend</option>
+                    <option value="Relative">Relative</option>
+                    <option value="Colleague">Colleague</option>
+                    <option value="Other">Other</option>
+                `;
+                
+                memberForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="memberName${i}"><i class="fas fa-user"></i> Traveler ${i} - Full Name</label>
+                        <input type="text" id="memberName${i}" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberAge${i}"><i class="fas fa-birthday-cake"></i> Age</label>
+                        <input type="number" id="memberAge${i}" placeholder="Enter age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberRelationship${i}"><i class="fas fa-people-arrows"></i> Relationship</label>
+                        <select id="memberRelationship${i}" ${i === 1 ? 'disabled' : ''}>
+                            ${relationshipOptions}
+                        </select>
+                    </div>
+                `;
+                form.appendChild(memberForm);
+            }
+            
+            document.getElementById('membersList').style.display = 'none';
+        }
+
+        // =============================================
+        // FIXED: submitMemberDetails with duration_days and interests
+        // =============================================
+        async function submitMemberDetails(tripData) {
+            const members = [];
+            let allValid = true;
+            
+            const count = tripData.travellers || parseInt(document.getElementById('memberCount').textContent) || 1;
+            
+            for (let i = 1; i <= count; i++) {
+                const nameInput = document.getElementById(`memberName${i}`);
+                const ageInput = document.getElementById(`memberAge${i}`);
+                const relationshipSelect = document.getElementById(`memberRelationship${i}`);
+                
+                if (!nameInput || !ageInput) continue;
+                
+                if (!nameInput.value.trim() || !ageInput.value) {
+                    allValid = false;
+                    nameInput.style.borderColor = '#ff6b6b';
+                    ageInput.style.borderColor = '#ff6b6b';
+                } else {
+                    nameInput.style.borderColor = '';
+                    ageInput.style.borderColor = '';
+                    
+                    members.push({
+                        name: nameInput.value.trim(),
+                        age: parseInt(ageInput.value),
+                        relationship: relationshipSelect ? relationshipSelect.value : (i === 1 ? 'Self' : 'Other')
+                    });
+                }
+            }
+            
+            if (!allValid) {
+                alert('Please fill in all member details before submitting.');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            submitBtn.disabled = true;
+            
+            try {
+                localStorage.removeItem('current_preference_id');
+                sessionStorage.removeItem('current_preference_id');
+                
+                const timestamp = Date.now();
+                const random = Math.floor(Math.random() * 10000);
+                let preference_id = parseInt(String(timestamp).slice(-9) + random);
+                preference_id = ensureIntRange(preference_id);
+                
+                console.log('✅ Created NEW preference_id:', preference_id);
+                
+                // ===== CALCULATE DURATION DAYS =====
+                let duration_days = 0;
+                if (tripData.startDate && tripData.endDate) {
+                    const start = new Date(tripData.startDate);
+                    const end = new Date(tripData.endDate);
+                    const diffTime = Math.abs(end - start);
+                    duration_days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                }
+                console.log('📅 Duration days calculated:', duration_days);
+                
+                // ===== GET INTERESTS FROM STORAGE =====
+                let interests = [];
+                try {
+                    // Try sessionStorage first
+                    const savedInterests = sessionStorage.getItem('selectedInterests');
+                    if (savedInterests) {
+                        interests = JSON.parse(savedInterests);
+                        console.log('🎯 Interests from sessionStorage:', interests);
+                    } else {
+                        // Try localStorage as backup
+                        const localInterests = localStorage.getItem('selectedInterests');
+                        if (localInterests) {
+                            interests = JSON.parse(localInterests);
+                            console.log('🎯 Interests from localStorage:', interests);
+                        } else {
+                            // Use destination-based default interests
+                            const destination = tripData.destination?.toLowerCase() || '';
+                            for (const [key, value] of Object.entries(destinationData)) {
+                                if (destination.includes(key) || key.includes(destination)) {
+                                    interests = value.defaultInterests || [];
+                                    break;
+                                }
+                            }
+                            if (interests.length === 0) {
+                                interests = ['sightseeing', 'food', 'shopping']; // Default fallback
+                            }
+                            console.log('🎯 Using destination-based default interests:', interests);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error getting interests:', e);
+                    interests = ['sightseeing', 'food', 'shopping']; // Fallback
+                }
+                
+                // Save to travel_preferences table with ALL required fields
+                try {
+                    console.log('Saving to travel_preferences table:', {
+                        preference_id,
+                        duration_days,
+                        interests,
+                        destination: tripData.destination,
+                        start_date: tripData.startDate,
+                        end_date: tripData.endDate
+                    });
+                    
+                    const prefResponse = await fetch(`${API_BASE_URL}/preferences/save`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            preference_id: preference_id,
+                            user_id: getUserId() || 1,
+                            destination: tripData.destination,
+                            start_date: tripData.startDate,
+                            end_date: tripData.endDate,
+                            duration_days: duration_days,  // ✅ CRITICAL: duration_days included
+                            budget_min: parseInt(tripData.budgetMin) || 0,
+                            budget_max: parseInt(tripData.budgetMax) || 0,
+                            travelers_count: tripData.travellers,
+                            interests: interests,  // ✅ CRITICAL: interests included as JSON
+                            companion_type: 'self-group',
+                            match_status: 'pending'
+                        })
+                    });
+                    
+                    const responseText = await prefResponse.text();
+                    console.log('Raw preference response:', responseText);
+                    
+                    let prefData;
+                    try {
+                        prefData = JSON.parse(responseText);
+                    } catch (e) {
+                        console.error('Error parsing preference response:', e);
+                        prefData = { success: false };
+                    }
+                    
+                    if (prefData.success && prefData.preference_id) {
+                        preference_id = ensureIntRange(prefData.preference_id);
+                        console.log('Using server preference_id:', preference_id);
+                    }
+                    
+                    // Show success message with details
+                    showSuccessMessageWithDetails(
+                        `✅ Travel preferences saved! Duration: ${duration_days} days, Interests: ${interests.length} selected`,
+                        'success'
+                    );
+                    
+                } catch (e) {
+                    console.error('Error creating preference:', e);
+                    showErrorMessage('Warning: Could not save to preferences table', 'warning');
+                }
+                
+                console.log('✅ FINAL preference_id:', preference_id);
+                console.log('📊 Travel Preferences Data:');
+                console.log(`   - Duration Days: ${duration_days}`);
+                console.log(`   - Interests: ${JSON.stringify(interests)}`);
+                console.log(`   - Destination: ${tripData.destination}`);
+                
+                if (isBackendConnected) {
+                    const response = await fetch(`${API_BASE_URL}/members/save`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            preference_id: preference_id,
+                            members: members.map(member => ({
+                                name: member.name,
+                                age: member.age,
+                                relationship: member.relationship
+                            }))
+                        })
+                    });
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        localStorage.setItem('tripMembers', JSON.stringify(members));
+                        localStorage.setItem('current_preference_id', preference_id);
+                        sessionStorage.setItem('current_preference_id', preference_id);
+                        
+                        // Also store interests and duration for later use
+                        localStorage.setItem('trip_duration_days', duration_days);
+                        localStorage.setItem('trip_interests', JSON.stringify(interests));
+                        
+                        showSuccessMessage(members, tripData);
+                        showDatabaseSavedStatus();
+                        
+                        console.log('✅ ALL DATA SAVED SUCCESSFULLY:');
+                        console.log(`   travel_preferences: ID=${preference_id}, duration=${duration_days}, interests=`, interests);
+                        console.log(`   travel_group_members: ${members.length} members`);
+                        
+                        showSuccessMessageWithItinerary(
+                            `✅ Saved! Duration: ${duration_days} days, Interests: ${interests.length} selected`, 
+                            members, 
+                            tripData
+                        );
+                        
+                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Registration Complete!';
+                        submitBtn.style.background = 'linear-gradient(to right, #4CAF50, #45a049)';
+                    } else {
+                        throw new Error(result.message || 'Failed to save to database');
+                    }
+                } else {
+                    localStorage.setItem('tripMembers', JSON.stringify(members));
+                    localStorage.setItem('current_preference_id', preference_id);
+                    localStorage.setItem('trip_duration_days', duration_days);
+                    localStorage.setItem('trip_interests', JSON.stringify(interests));
+                    localStorage.setItem('pendingMembers', JSON.stringify({
+                        members: members,
+                        preference_id: preference_id,
+                        tripData: {
+                            ...tripData,
+                            duration_days: duration_days,
+                            interests: interests
+                        },
+                        timestamp: new Date().toISOString()
+                    }));
+                    
+                    showSuccessMessage(members, tripData);
+                    showLocalSavedStatus();
+                    document.getElementById('syncPendingContainer').style.display = 'block';
+                    
+                    console.log('⚠️ Saved locally with data:', {
+                        preference_id,
+                        duration_days,
+                        interests
+                    });
+                    
+                    showSuccessMessageWithItinerary(
+                        `⚠️ Saved locally! Duration: ${duration_days} days, Interests: ${interests.length} selected`,
+                        members, 
+                        tripData
+                    );
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Saved Locally!';
+                    submitBtn.style.background = 'linear-gradient(to right, #FFA500, #FF8C00)';
+                }
+                
+            } catch (error) {
+                console.error('❌ Error saving members:', error);
+                showErrorMessage('Failed to save members. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showSuccessMessageWithDetails(message, type) {
+            const statusEl = document.getElementById('actionStatus');
+            statusEl.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            setTimeout(() => {
+                statusEl.innerHTML = '';
+            }, 5000);
+        }
+
+        function showSuccessMessageWithItinerary(message, members, tripData) {
+            const statusEl = document.getElementById('actionStatus');
+            
+            statusEl.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                    <div style="margin-left: auto;">
+                        <button class="itinerary-btn" onclick="redirectToRishikesh()" style="padding: 8px 15px; font-size: 0.9rem;">
+                            <i class="fas fa-map-signals"></i> View Itinerary
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            showSuccessMessage(members, tripData);
+        }
+
+        async function syncPendingMembers() {
+            const pendingData = localStorage.getItem('pendingMembers');
+            if (!pendingData) {
+                showErrorMessage('No pending data to sync', 'warning');
+                return;
+            }
+            
+            try {
+                const data = JSON.parse(pendingData);
+                console.log('Syncing pending members:', data);
+                
+                let preference_id = data.preference_id;
+                if (preference_id && typeof preference_id === 'string') {
+                    preference_id = parseInt(preference_id.replace('pref_', ''));
+                }
+                preference_id = ensureIntRange(preference_id);
+                
+                const syncBtn = document.getElementById('syncPendingBtn');
+                syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+                syncBtn.disabled = true;
+                
+                // First ensure travel_preferences exists with duration and interests
+                try {
+                    await fetch(`${API_BASE_URL}/preferences/save`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            preference_id: preference_id,
+                            user_id: getUserId() || 1,
+                            destination: data.tripData.destination,
+                            start_date: data.tripData.startDate,
+                            end_date: data.tripData.endDate,
+                            duration_days: data.tripData.duration_days || calculateDuration(data.tripData.startDate, data.tripData.endDate),
+                            budget_min: parseInt(data.tripData.budgetMin) || 0,
+                            budget_max: parseInt(data.tripData.budgetMax) || 0,
+                            travelers_count: data.tripData.travellers,
+                            interests: data.tripData.interests || [],
+                            companion_type: 'self-group',
+                            match_status: 'pending'
+                        })
+                    });
+                } catch (e) {
+                    console.error('Error ensuring preference exists:', e);
+                }
+                
+                const response = await fetch(`${API_BASE_URL}/members/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        preference_id: preference_id,
+                        members: data.members
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        localStorage.removeItem('pendingMembers');
+                        localStorage.setItem('tripMembers', JSON.stringify(data.members));
+                        localStorage.setItem('current_preference_id', preference_id);
+                        sessionStorage.setItem('current_preference_id', preference_id);
+                        
+                        document.getElementById('syncPendingContainer').style.display = 'none';
+                        
+                        showErrorMessage('✅ Pending data synced to database!', 'success');
+                        showDatabaseSavedStatus();
+                        
+                        const submitBtn = document.getElementById('submitBtn');
+                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Registration Complete!';
+                        submitBtn.style.background = 'linear-gradient(to right, #4CAF50, #45a049)';
+                        
+                        return true;
+                    }
+                } else {
+                    throw new Error('Sync failed');
+                }
+            } catch (error) {
+                console.error('Error syncing pending members:', error);
+                showErrorMessage('Failed to sync pending data. Please try again.', 'error');
+            } finally {
+                const syncBtn = document.getElementById('syncPendingBtn');
+                syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync Pending Data to Database';
+                syncBtn.disabled = false;
+            }
+            return false;
+        }
+
+        function calculateDuration(startDate, endDate) {
+            if (!startDate || !endDate) return 0;
+            try {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const diffTime = Math.abs(end - start);
+                return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            } catch (e) {
+                return 0;
+            }
+        }
+
+        function checkPendingData() {
+            const pendingData = localStorage.getItem('pendingMembers');
+            if (pendingData) {
+                document.getElementById('syncPendingContainer').style.display = 'block';
+                try {
+                    const data = JSON.parse(pendingData);
+                    showSuccessMessage(data.members, data.tripData);
+                    showLocalSavedStatus();
+                } catch (e) {
+                    console.error('Error parsing pending data:', e);
+                }
+            }
+        }
+
+        function showSuccessMessage(members, tripData) {
+            const membersListContent = document.getElementById('membersListContent');
+            membersListContent.innerHTML = '';
+            
+            members.forEach(member => {
+                const memberItem = document.createElement('div');
+                memberItem.className = 'member-item';
+                memberItem.innerHTML = `
+                    <span class="member-name">
+                        <i class="fas fa-user-circle"></i> ${member.name}
+                        <span class="member-relationship">${member.relationship || 'Self'}</span>
+                    </span>
+                    <span class="member-age">Age: ${member.age}</span>
+                `;
+                membersListContent.appendChild(memberItem);
+            });
+            
+            document.getElementById('membersList').style.display = 'block';
+        }
+
+        function showDatabaseSavedStatus() {
+            const savedStatus = document.getElementById('savedStatus');
+            const localStatus = document.getElementById('localSavedStatus');
+            
+            savedStatus.style.display = 'inline-block';
+            localStatus.style.display = 'none';
+            
+            setTimeout(() => {
+                savedStatus.style.display = 'none';
+            }, 3000);
+        }
+
+        function showLocalSavedStatus() {
+            const savedStatus = document.getElementById('savedStatus');
+            const localStatus = document.getElementById('localSavedStatus');
+            
+            localStatus.style.display = 'inline-block';
+            savedStatus.style.display = 'none';
+            
+            setTimeout(() => {
+                localStatus.style.display = 'none';
+            }, 3000);
+        }
+
+        function showErrorMessage(message, type = 'error') {
+            const statusEl = document.getElementById('actionStatus');
+            
+            let className = 'error-message';
+            let icon = 'fa-exclamation-circle';
+            
+            if (type === 'warning') {
+                className = 'warning-message';
+                icon = 'fa-exclamation-triangle';
+            } else if (type === 'success') {
+                className = 'success-message';
+                icon = 'fa-check-circle';
+            }
+            
+            statusEl.innerHTML = `
+                <div class="${className}">
+                    <i class="fas ${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                statusEl.innerHTML = '';
+            }, 5000);
+        }
+
+        function getUserId() {
+            const userData = localStorage.getItem('user');
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    return user.id || user.user_id || user.userId;
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                }
+            }
+            
+            const sessionUser = sessionStorage.getItem('currentUser');
+            if (sessionUser) {
+                try {
+                    const user = JSON.parse(sessionUser);
+                    return user.id || user.user_id;
+                } catch (e) {
+                    console.error('Error parsing session user:', e);
+                }
+            }
+            
+            return null;
+        }
+
+        // =============================================
+        // DEBUG FUNCTIONS
+        // =============================================
+        
+        window.checkMembersData = function() {
+            console.log('=== MEMBERS DATA CHECK ===');
+            console.log('Preference ID from session:', sessionStorage.getItem('current_preference_id'));
+            console.log('Preference ID from localStorage:', localStorage.getItem('current_preference_id'));
+            console.log('Stored members:', localStorage.getItem('tripMembers'));
+            console.log('Duration days:', localStorage.getItem('trip_duration_days'));
+            console.log('Interests:', localStorage.getItem('trip_interests'));
+            
+            const members = JSON.parse(localStorage.getItem('tripMembers') || '[]');
+            const prefId = localStorage.getItem('current_preference_id');
+            const duration = localStorage.getItem('trip_duration_days');
+            const interests = JSON.parse(localStorage.getItem('trip_interests') || '[]');
+            
+            console.log('\n✅ SAVED DATA:');
+            console.log(`   Preference ID: ${prefId}`);
+            console.log(`   Duration: ${duration} days`);
+            console.log(`   Interests:`, interests);
+            console.log(`   Members (${members.length}):`);
+            members.forEach((member, index) => {
+                console.log(`     ${index + 1}. ${member.name} (Age: ${member.age}, Relation: ${member.relationship})`);
+            });
+        };
+
+        window.clearAllData = function() {
+            localStorage.removeItem('tripMembers');
+            localStorage.removeItem('pendingMembers');
+            localStorage.removeItem('current_preference_id');
+            localStorage.removeItem('pending_travel_prefs');
+            localStorage.removeItem('trip_duration_days');
+            localStorage.removeItem('trip_interests');
+            sessionStorage.removeItem('current_preference_id');
+            sessionStorage.removeItem('lastSearchParams');
+            sessionStorage.removeItem('tripType');
+            sessionStorage.removeItem('selectedInterests');
+            console.log('✅ All storage cleared');
+        };
+
+        window.checkStorage = function() {
+            console.log('=== STORAGE DEBUG ===');
+            console.log('sessionStorage lastSearchParams:', sessionStorage.getItem('lastSearchParams'));
+            console.log('sessionStorage selectedInterests:', sessionStorage.getItem('selectedInterests'));
+            console.log('sessionStorage tripType:', sessionStorage.getItem('tripType'));
+            console.log('sessionStorage current_preference_id:', sessionStorage.getItem('current_preference_id'));
+            console.log('localStorage current_preference_id:', localStorage.getItem('current_preference_id'));
+            console.log('localStorage pending_travel_prefs:', localStorage.getItem('pending_travel_prefs'));
+            console.log('localStorage tripMembers:', localStorage.getItem('tripMembers'));
+            console.log('localStorage pendingMembers:', localStorage.getItem('pendingMembers'));
+            console.log('localStorage trip_duration_days:', localStorage.getItem('trip_duration_days'));
+            console.log('localStorage trip_interests:', localStorage.getItem('trip_interests'));
+            console.log('URL params:', Object.fromEntries(new URLSearchParams(window.location.search)));
+        };
+
+        window.testConnection = async function() {
+            const result = await testBackendConnection();
+            updateConnectionStatusUI();
+            return result;
+        };
+        
+        window.retryConnection = async function() {
+            console.log('🔄 Retrying database connection...');
+            const result = await testBackendConnection();
+            if (result) {
+                showErrorMessage('✅ Database connection restored!', 'success');
+            }
+            return result;
+        };
+        
+        window.manualSync = syncPendingMembers;
+        
+        window.clearForm = function() {
+            const count = parseInt(document.getElementById('memberCount').textContent) || 1;
+            for (let i = 1; i <= count; i++) {
+                const nameInput = document.getElementById(`memberName${i}`);
+                const ageInput = document.getElementById(`memberAge${i}`);
+                if (nameInput) nameInput.value = '';
+                if (ageInput) ageInput.value = '';
+            }
+            document.getElementById('membersList').style.display = 'none';
+            console.log('✅ Form cleared');
+        };
+
+        window.redirectToRishikesh = redirectToRishikesh;
+    </script>
+</body>
+</html>
