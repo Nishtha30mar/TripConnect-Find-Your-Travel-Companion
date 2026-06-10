@@ -10,7 +10,7 @@ The platform intelligently matches travelers based on destination, travel dates,
 
 GitHub Repository:
 
-https://github.com/Nishtha30mar/TripConnect
+https://github.com/Nishtha30mar/TripConnect-Find-Your-Travel-Companion.git
 
 ---
 
