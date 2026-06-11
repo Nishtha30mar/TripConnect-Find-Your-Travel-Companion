@@ -330,42 +330,27 @@ nodemon server.js
 
 ### User Registration
 
-Add:
-
-- signup1.jpeg
-- signup2.jpeg
-- signup3.jpeg
-
+![alt text](signup3-1.jpeg) 
+![alt text](signup1-1.jpeg) 
+![alt text](signup2-1.jpeg)
 ### Travel Preferences
 
-Add:
-
-- travelStyle.jpeg
+![alt text](travelStyle-1.jpeg)
 
 ### Travel Buddy Mode
 
-Add:
-
-- travelBuddyGroup.jpeg
+![alt text](travelBuddyGroup-1.jpeg)
 
 ### Self Group Mode
 
-Add:
-
-- selfGroup.jpeg
+![alt text](selfGroup-1.jpeg)
 
 ### Package Selection
 
-Add:
-
-- packit.jpeg
-
+![alt text](image.png)
 ### User Reviews
 
-Add:
-
-- review.jpeg
-
+![alt text](image-1.png)
 ---
 
 ## Future Enhancements
