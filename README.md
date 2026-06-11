@@ -288,7 +288,7 @@ GET  /api/reviews
 ### Clone Repository
 
 ```bash
-git clone https://github.com/Nishtha30mar/TripConnect.git
+git clone https://github.com/Nishtha30mar/TripConnect-Find-Your-Travel-Companion.git
 cd TripConnect
 ```
 
